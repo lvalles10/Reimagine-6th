@@ -8,4 +8,4 @@ We will be working in conjunction with KTOWN FOR ALL on their ongoing project re
 
 **What problems might arise in developing this application?**
 
-Developing this crowd-sourced mapping application could present such issues as...
+Developing this crowd-sourced mapping application could present such issues as the inherent biases within our data, difficulty in reconciling data from different sources, and ..... We look forward to our conversation with Adriane from KTown For All tomorrow in broadening our perception of the project! 

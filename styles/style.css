@@ -3,7 +3,9 @@ body{
     grid-template-columns: 0.75fr 0.25fr; 
     grid-auto-rows: .2fr .5fr .2fr;
     grid-template-areas: "header header" "mappanel mappanel" "sidebar sidebar";
-    background: rgb(156, 177, 233);
+    background-image: url(https://t3.ftcdn.net/jpg/02/53/59/18/360_F_253591845_DjZi5bCf6jQv94Qlvf0MWZ3oGu3Ludzy.jpg);
+    background-attachment: fixed;
+    background-size: cover;
     ;
 }
 
@@ -18,7 +20,7 @@ header{
 
 #contents{
     grid-area: sidebar;
-    display:grid;
+    display: grid;
 }
 
 /* fix for survey to fit in the iframe */

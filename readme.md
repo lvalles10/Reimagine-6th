@@ -1,4 +1,4 @@
-##Reimagining 6th Street:
+##Reimagining 6th Street##:
 
 **Technology Used for the Project**
 

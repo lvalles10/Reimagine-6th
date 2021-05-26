@@ -1,0 +1,39 @@
+body{
+    display: grid;
+    grid-template-columns: 0.75fr 0.25fr; 
+    grid-auto-rows: .2fr .5fr .2fr;
+    grid-template-areas: "header header" "mappanel mappanel" "sidebar sidebar";
+    background: rgb(156, 177, 233);
+    ;
+}
+
+header{
+    grid-area: header;
+}
+
+#map{
+    height:90vh;
+    grid-area: mappanel;
+} 
+
+#contents{
+    grid-area: sidebar;
+    display:grid;
+}
+
+/* fix for survey to fit in the iframe */
+#survey {
+    overflow: hidden;
+    /* 16:9 aspect ratio */
+    padding-top: 0%;
+    position: relative;
+}
+
+#survey iframe {
+   border: 0;
+   height: 100%;
+   left: 0;
+   position: absolute;
+   top: 0;
+   width: 100%;
+}

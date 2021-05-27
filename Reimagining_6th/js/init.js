@@ -42,7 +42,7 @@ function addMarker(data){
         createButtons(data.lat,data.lng,data.locationaddress)
         }
     else{
-        exampleOptions.fillColor = "orange"
+        exampleOptions.fillColor = "pink"
         NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
         createButtons(data.lat,data.lng,data.locationaddress)
     }

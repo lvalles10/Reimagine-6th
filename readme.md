@@ -2,7 +2,7 @@
 
 **Technology Used for the Project**
 
-For our project, we utilized Microsoft Forms as well as Leaflet. The Microsoft Form was used to collect community survey responses and data regarding folks' opinions on the "Reimagining 6th" proposal. Leaflet was used to exhibit the responses to our survey and empower community narratives. We specifcally showcased the data for the responses to Question 7 of our survey, which asked responders which community problems they felt were most prevalent in Koreatown and how certain amenities could be incorporated into the "Reimagining 6th" proposal to address those issues.
+For our project, we utilized Microsoft Forms, Google Sheets, and Leaflet. The Microsoft Form was used to collect community survey responses and data regarding folks' opinions on the "Reimagining 6th" proposal. Leaflet was used to exhibit the responses to our survey and empower community narratives. We specifcally showcased the data for the responses to Question 7 of our survey, which asked responders which community problems they felt were most prevalent in Koreatown and how certain amenities could be incorporated into the "Reimagining 6th" proposal to address those issues.
 
 **How It Could Be Used in the Future**
 

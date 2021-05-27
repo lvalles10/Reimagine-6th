@@ -38,12 +38,12 @@ let exampleOptions = {
 function addMarker(data){
     if(data.Ktown_Resident = "Yes"){
         exampleOptions.fillColor = "blue"
-        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
+        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.Meaningful}`))
         createButtons(data.lat,data.lng,data.locationaddress)
         }
     else{
         exampleOptions.fillColor = "orange"
-        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
+        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.Meaningful}`))
         createButtons(data.lat,data.lng,data.locationaddress)
     }
     return data.timestamp

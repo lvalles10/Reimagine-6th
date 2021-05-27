@@ -1,6 +1,6 @@
 const map = L.map('map').setView([34.063634, -118.295405], 16);
 
-const url = "https://spreadsheets.google.com/feeds/list/1SuwSP45miCu_YN4_dKbZb1NAtOMC-P-Jv-iMCCrdZSE/od6/public/values?alt=json"
+const url = "https://spreadsheets.google.com/feeds/list/1lXoG993LBzX6SsR-gE2Y7bTMlXJJT52j-_Hzg02k9zE/o4eq4sq/public/values?alt=json"
 
 let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
@@ -36,14 +36,14 @@ let exampleOptions = {
 }
 
 function addMarker(data){
-    if(data.Ktown_Resident = "Yes"){
+    if(data.areyouaresidentofkoreatown == "Yes"){
         exampleOptions.fillColor = "blue"
-        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.Meaningful}`))
+        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
         createButtons(data.lat,data.lng,data.locationaddress)
         }
     else{
         exampleOptions.fillColor = "orange"
-        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.Meaningful}`))
+        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
         createButtons(data.lat,data.lng,data.locationaddress)
     }
     return data.timestamp

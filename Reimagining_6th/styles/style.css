@@ -19,6 +19,7 @@ header{
     grid-area: mappanel;
 } 
 
+
 #contents{
     grid-area: sidebar;
     display: grid;

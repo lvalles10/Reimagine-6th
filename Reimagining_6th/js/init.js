@@ -2,6 +2,8 @@ const map = L.map('map').setView([34.063634, -118.295405], 16);
 
 const url = "https://spreadsheets.google.com/feeds/list/1SuwSP45miCu_YN4_dKbZb1NAtOMC-P-Jv-iMCCrdZSE/od6/public/values?alt=json"
 
+let scroller = scrollama();
+
 let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
 	maxZoom: 16
@@ -49,15 +51,30 @@ function addMarker(data){
     return data.address
 }
 
-function createButtons(lat,lng,title){
+//function createButtons(lat,lng,title){
 
+   // const newButton = document.createElement("button");
+  //  newButton.id = "button"+title;
+   // newButton.innerHTML = title;
+    //newButton.setAttribute("lat",lat); 
+   // newButton.setAttribute("lng",lng);
+   // newButton.style.background = 'moccasin';
+    //newButton.style.color = 'black';
+    //newButton.addEventListener('click', function(){
+      //  map.flyTo([lat,lng]);
+   // })
+   // const spaceForButtons = document.getElementById('contents')
+   /// spaceForButtons.appendChild(newButton);
+//}
+
+function createButtons(lat,lng,title){
     const newButton = document.createElement("button");
     newButton.id = "button"+title;
     newButton.innerHTML = title;
+    newButton.setAttribute("class","step") // add the class called "step" to the button or div
+    newButton.setAttribute("data-step",newButton.id) // add a data-step for the button id to know which step we are on
     newButton.setAttribute("lat",lat); 
     newButton.setAttribute("lng",lng);
-    newButton.style.background = 'moccasin';
-    newButton.style.color = 'black';
     newButton.addEventListener('click', function(){
         map.flyTo([lat,lng]);
     })
@@ -85,12 +102,43 @@ function formatData(theData){
         map.fitBounds(allLayers.getBounds());        
 }
 
+scroller
+        .setup({
+            step: ".step", // this is the name of the class that we are using to step into, it is called "step", not very original
+        })
+        // do something when you enter a "step":
+        .onStepEnter((response) => {
+            // you can access these objects: { element, index, direction }
+            // use the function to use element attributes of the button 
+            // it contains the lat/lng: 
+            scrollStepper(response.element.attributes)
+        })
+        .onStepExit((response) => {
+            // { element, index, direction }
+            // left this in case you want something to happen when someone
+            // steps out of a div to know what story they are on.
+        });
+        
+}
+function scrollStepper(thisStep){
+    // optional: console log the step data attributes:
+    // console.log("you are in thisStep: "+thisStep)
+    let thisLat = thisStep.lat.value
+    let thisLng = thisStep.lng.value
+    // tell the map to fly to this step's lat/lng pair:
+    map.flyTo([thisLat,thisLng])
+}
+
+
 let layers = {
 	"Koreatown resident": KTownResident,
 	"Not a Koreatown resident": NotKTownResident
 }
 
 L.control.layers(null,layers, {collapsed:false}).addTo(map)
+
+// setup resize event for scrollama incase someone wants to resize the page...
+window.addEventListener("resize", scroller.resize);
 
 
 var legend = L.control({ position: "bottomleft" });

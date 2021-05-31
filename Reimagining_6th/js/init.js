@@ -50,6 +50,7 @@ function addMarker(data){
 }
 
 function createButtons(lat,lng,title){
+
     const newButton = document.createElement("button");
     newButton.id = "button"+title;
     newButton.innerHTML = title;

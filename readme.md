@@ -11,7 +11,7 @@ We hope for this technology and mapplication to be used in the future to collect
 
 **What social problem is being addressed?**
 
-We will be working in conjunction with Streets FOR ALL on their ongoing project regarding closing Alexandria and 6th to create room for a greenspace. Last week, our group met with Adriane Hoff, a KTown Neighborhood Councilmember, to discuss the social problem being addressed by the project. She informed us that the project arises from a need for greater green space in KTown, as it is one of the most park-poor neighborhoods in Los Angeles. We also hope to address inequities in survey design for the project and uplift community narratives in our final project. Here is the current websie regarding the project and its intentions: https://wcknc.la/6thst/.
+We will be working in conjunction with Streets FOR ALL on their ongoing project regarding closing Alexandria and 6th to create room for a greenspace. Last week, our group met with Adriane Hoff, a KTown Neighborhood Councilmember, to discuss the social problem being addressed by the project. She informed us that the project arises from a need for greater green space in KTown, as it is one of the most park-poor neighborhoods in Los Angeles. We also hope to address inequities in survey design for the project and uplift community narratives in our final project. Here is the current website regarding the project and its intentions: https://wcknc.la/6thst/.
 
 **What problems might arise in developing this application?**
 

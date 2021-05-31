@@ -1,6 +1,6 @@
 const map = L.map('map').setView([34.063634, -118.295405], 16);
 
-const url = "https://spreadsheets.google.com/feeds/list/1lXoG993LBzX6SsR-gE2Y7bTMlXJJT52j-_Hzg02k9zE/o4eq4sq/public/values?alt=json"
+const url = "https://spreadsheets.google.com/feeds/list/1SuwSP45miCu_YN4_dKbZb1NAtOMC-P-Jv-iMCCrdZSE/od6/public/values?alt=json"
 
 let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
@@ -32,21 +32,21 @@ let exampleOptions = {
     color: "#000",
     weight: 1,
     opacity: 1,
-    fillOpacity: 0.3
+    fillOpacity: 0.4
 }
 
 function addMarker(data){
-    if(data.areyouaresidentofkoreatown == "Yes"){
-        exampleOptions.fillColor = "blue"
-        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
-        createButtons(data.lat,data.lng,data.locationaddress)
+    if(data.ktownresident == "Yes"){
+        exampleOptions.fillColor = "lightblue"
+        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
+        createButtons(data.lat,data.lng,data.address)
         }
     else{
-        exampleOptions.fillColor = "pink"
-        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.locationname}`))
-        createButtons(data.lat,data.lng,data.locationaddress)
+        exampleOptions.fillColor = "hotpink"
+        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
+        createButtons(data.lat,data.lng,data.address)
     }
-    return data.timestamp
+    return data.address
 }
 
 function createButtons(lat,lng,title){
@@ -80,7 +80,7 @@ function formatData(theData){
         formattedData.forEach(addMarker)
         KTownResident.addTo(map)
         NotKTownResident.addTo(map)
-        let allLayers = L.featureGroup([speakFluentEnglish,speakOtherLanguage]);
+        let allLayers = L.featureGroup([KTownResident,NotKTownResident]);
         map.fitBounds(allLayers.getBounds());        
 }
 
@@ -89,4 +89,23 @@ let layers = {
 	"Not a Koreatown resident": NotKTownResident
 }
 
-L.control.layers(null,layers).addTo(map)
+L.control.layers(null,layers, {collapsed:false}).addTo(map)
+
+
+var legend = L.control({ position: "bottomleft" });
+
+legend.onAdd = function(map) {
+  var div = L.DomUtil.create("div", "legend");
+  div.innerHTML += "<h4>Legend</h4>";
+  div.innerHTML += '<i style="background: lightblue"></i><span>Korea Town Resident</span><br>';
+  div.innerHTML += '<i style="background: pink"></i><span>Not Korea Town Resident</span><br>';
+ // div.innerHTML += '<i style="background: #E6E696"></i><span>Land</span><br>';
+ //div.innerHTML += '<i style="background: #E8E6E0"></i><span>Residential</span><br>';
+ // div.innerHTML += '<i style="background: #FFFFFF"></i><span>Ice</span><br>';
+  //div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Grænse</span><br>';
+  
+  return div;
+};
+
+legend.addTo(map);
+

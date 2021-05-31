@@ -1,6 +1,6 @@
 const map = L.map('map').setView([34.063634, -118.295405], 16);
 
-const url = "https://spreadsheets.google.com/feeds/list/1SuwSP45miCu_YN4_dKbZb1NAtOMC-P-Jv-iMCCrdZSE/od6/public/values?alt=json"
+const url = "https://spreadsheets.google.com/feeds/list/1SuwSP45miCu_YN4_dKbZb1NAtOMC-P-Jv-iMCCrdZSE/od6/public/values?alt=json";
 
 let scroller = scrollama();
 
@@ -119,7 +119,6 @@ scroller
             // steps out of a div to know what story they are on.
         });
         
-}
 function scrollStepper(thisStep){
     // optional: console log the step data attributes:
     // console.log("you are in thisStep: "+thisStep)

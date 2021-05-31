@@ -6,7 +6,6 @@ body{
     background-image: url(https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/07/scrolling-gradient.png?fit=1200%2C600&ssl=1);
     background-attachment: fixed;
     background-size: cover;
-    overflow: hidden;    /* hides any overflow so our page doesn't extend beyond the window height*/
     height: 100vh; /* this makes our page cover the whole browser window*/
     width: 99vw;
     ;

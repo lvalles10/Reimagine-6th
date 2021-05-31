@@ -48,7 +48,7 @@ function addMarker(data){
         NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
         createButtons(data.lat,data.lng,data.address)
     }
-    return data.address
+    return data.address, data.communityissues
 }
 
 //function createButtons(lat,lng,title){

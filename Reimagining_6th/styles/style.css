@@ -10,6 +10,10 @@ body{
     width: 99vw;
     ;
 }
+#titleImage{
+  max-width: 200px;
+}
+
 
 header{
     grid-area: header;
@@ -55,6 +59,11 @@ header{
 .legend span {
   position: relative;
   bottom: 3px;
+  cursor: pointer;
+}
+
+.disabled{
+  color:rgb(194, 194, 194);
 }
 
 .legend i {
@@ -75,7 +84,7 @@ header{
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 9000; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */

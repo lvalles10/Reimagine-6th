@@ -145,8 +145,8 @@ var legend = L.control({ position: "bottomleft" });
 legend.onAdd = function(map) {
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<h4>Legend</h4>";
-  div.innerHTML += '<i style="background: lightblue"></i><span>Koreatown Resident</span><br>';
-  div.innerHTML += '<i style="background: pink"></i><span>Not Koreatown Resident</span><br>';
+  div.innerHTML += '<i style="background: lightblue"></i><span id="ktownResident">Koreatown Resident</span><br>';
+  div.innerHTML += '<i style="background: pink"></i><span id="notktownResident">Not Koreatown Resident</span><br>';
  // div.innerHTML += '<i style="background: #E6E696"></i><span>Land</span><br>';
  //div.innerHTML += '<i style="background: #E8E6E0"></i><span>Residential</span><br>';
  // div.innerHTML += '<i style="background: #FFFFFF"></i><span>Ice</span><br>';
@@ -156,6 +156,22 @@ legend.onAdd = function(map) {
 };
 
 legend.addTo(map);
+// toggle the legend for ktownResident grouplayer
+var ktownResidentLegend = document.getElementById("ktownResident");
+
+ktownResidentLegend.onclick = function() {
+  if(map.hasLayer(KTownResident)){
+    map.removeLayer(KTownResident)
+  }
+  else{
+    map.addLayer(KTownResident)
+  }
+  ktownResidentLegend.classList.toggle("disabled");
+}
+// TODO: toggle the legend for non-ktownResident grouplayer
+
+
+
 
 // Get the modal
 var modal = document.getElementById("myModal");
@@ -182,4 +198,4 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
-
+document.getElementById("myBtn").click() // simulate click to start modal

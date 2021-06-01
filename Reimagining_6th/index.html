@@ -1,20 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <!-- Trigger/Open The Modal -->
-  <button id="myBtn">Open Modal</button>
-
-  <!-- The Modal -->
-  <div id="myModal" class="modal">
-  
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Some text in the Modal..</p>
-    </div>
-
     <head>
 
-        <img src = "![WCKNC](https://user-images.githubusercontent.com/81720023/120141532-e8832d00-c199-11eb-95af-10b91412344a.png)">
+       
         <title>Reimagine 6th Street</title>
         <meta charset="utf-8" />
         <link rel="shortcut icon" href="#">
@@ -38,21 +26,49 @@
     </head>
     
      <body>
-        <header><h2 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Welcome to Reimagine 6th Street!</h2>
-        <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">"Reimagine 6th Street" is a project to repurpose 6th Street in Koreatown
+        <header>
+            <h2 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                Welcome to Reimagine 6th Street!
+            </h2>
+            <img id="titleImage" src="https://user-images.githubusercontent.com/81720023/120141532-e8832d00-c199-11eb-95af-10b91412344a.png">
+            <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                "Reimagine 6th Street" is a project to repurpose 6th Street in Koreatown
             from Normandie Ave. to Vermont Ave. for a public pedestrian plaza to support existing Koreatown community members and stakeholders. 
             The goals of this project are three-fold: to provide open-space in Koreatown, reduce traffic violence, and boost existing small businesses. </p><h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-        <div id="languageMenu">
-            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u" target="_blank"><button>English</button></a>
-            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=es-mx" target="_blank"><button>Español</button></a>
-            <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=ko" target="_blank"><button>한국어</button></a>
-        </div>
-    </header> <!-- Hello! you forgot to close the header! -->
+            <div id="languageMenu">
+                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u" target="_blank"><button>English</button></a>
+                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=es-mx" target="_blank"><button>Español</button></a>
+                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=ko" target="_blank"><button>한국어</button></a>
+            </div>
+            <button id="myBtn">Open Modal</button>
+                        
+            <div id="google_translate_element"></div>
+
+            <script type="text/javascript">
+            function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en',layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL}, 'google_translate_element');
+            }
+            </script>
+
+            <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        </header> <!-- Hello! you forgot to close the header! -->
         <div id="contents"></div>
         <div id="legend"></div>
         <div id="map"></div>
-        <div id="survey">
+        <div id="survey"></div>
+        <!-- Trigger/Open The Modal -->
+        
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+        
+            <!-- Modal content -->
+            <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+            </div>
         </div>
+
         <script src="js/init.js"></script>
     </body>
 </html>

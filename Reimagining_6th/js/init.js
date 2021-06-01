@@ -129,12 +129,12 @@ function scrollStepper(thisStep){
 }
 
 
-let layers = {
-	"Koreatown resident": KTownResident,
-	"Not a Koreatown resident": NotKTownResident
-}
+//let layers = {
+//	"Koreatown resident": KTownResident,
+	//"Not a Koreatown resident": NotKTownResident
+//}
 
-L.control.layers(null,layers, {collapsed:false}).addTo(map)
+//L.control.layers(null,layers, {collapsed:false}).addTo(map)
 
 // setup resize event for scrollama incase someone wants to resize the page...
 window.addEventListener("resize", scroller.resize);
@@ -156,6 +156,7 @@ legend.onAdd = function(map) {
 };
 
 legend.addTo(map);
+
 // toggle the legend for ktownResident grouplayer
 var ktownResidentLegend = document.getElementById("ktownResident");
 
@@ -168,7 +169,18 @@ ktownResidentLegend.onclick = function() {
   }
   ktownResidentLegend.classList.toggle("disabled");
 }
-// TODO: toggle the legend for non-ktownResident grouplayer
+// toggle the legend for nonktownResident grouplayer
+var notktownResidentLegend = document.getElementById("notktownResident");
+
+notktownResidentLegend.onclick = function() {
+  if(map.hasLayer(NotKTownResident)){
+    map.removeLayer(NotKTownResident)
+  }
+  else{
+    map.addLayer(NotKTownResident)
+  }
+  notktownResidentLegend.classList.toggle("disabled");
+}
 
 
 

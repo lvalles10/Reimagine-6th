@@ -1,1 +1,82 @@
-In Progress
+<!DOCTYPE html>
+<head>
+    <style>
+        body, html {
+            height: 100%;
+  
+            
+            
+          }
+          body{
+
+            background-size:cover;
+            background-attachment: fixed;
+            height: 100vh; /* this makes our page cover the whole browser window*/
+            width: 99vw;
+            overflow: hidden;
+          }
+
+          .bgimg {
+            /* Background image */
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-rows: repeat(3, minmax(0, 1fr));
+            background:linear-gradient(0deg, rgba(218, 105, 171, 0.9), rgba(151, 0, 252, 0.96)), url('ktown.jpg');
+            align-items: top;
+            justify-items: center;
+            /* Full-screen */
+            /* Center the background image */
+            background-position: center;
+            /* Scale and zoom in the image */
+            background-size: cover;
+            /* Add position: relative to enable absolutely positioned elements inside the image (place text) */
+            position: relative;
+            /* Add a white text color to all elements inside the .bgimg container */
+            color: white;
+            height: 100vh;
+
+            /* Add a font */
+            font-family: "Arial", Courier, monospace;
+            /* Set the font-size to 25 pixels */
+            font-size: 16px;
+            padding: 10px;
+          }
+          
+          /* Position text in the top-left corner */
+          .topleft {
+            grid-column: 1;
+            grid-row:1;
+          }
+          
+          /* Position text in the bottom-left corner */
+          .bottomleft {
+            grid-column: 2;
+            grid-row:3;
+          }
+          
+          /* Position text in the middle */
+          .middle {
+            grid-column: 1 /span 2;
+            grid-row:2;
+          }
+          
+          /* Style the <hr> element */
+
+    </style>
+</head>
+<body>
+    <div class="bgimg">
+        <div class="topleft">
+          <p>Reimagining 6th Street</p>
+        </div>
+        <div class="middle">
+          <h1>COMING SOON * 곧 출시 * PRÓXIMAMENTE, EN BREVE, PRONTO</h1>
+          <!-- <hr> -->
+          <!-- <p>25 days</p> -->
+        </div>
+        <div class="bottomleft">
+          <p><a href="mailto:reimagining6th@gmail.com"><img src="mail.png" style="max-width:25px"></a></p>
+        </div>
+      </div> 
+
+</body>

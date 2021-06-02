@@ -2,7 +2,7 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr; 
     grid-auto-rows: minmax(5px, auto);
-    grid-template-areas: "header header" "mappanel sidebar";
+    grid-template-areas: "header header" "mappanel sidebar" "footer footer";
     background-image: url(https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/07/scrolling-gradient.png?fit=1200%2C600&ssl=1);
     background-attachment: fixed;
     background-size: cover;
@@ -18,6 +18,10 @@ body{
 header{
     grid-area: header;
     color: white
+}
+
+footer{
+  grid-area: footer;
 }
 
 #map{

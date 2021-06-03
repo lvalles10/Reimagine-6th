@@ -11,10 +11,6 @@ let Esri_WorldGrayCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/r
 
 Esri_WorldGrayCanvas.addTo(map)
 
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-// }).addTo(map);
-
 fetch(url)
 	.then(response => {
 		return response.json();
@@ -110,6 +106,11 @@ function getBoundary(layer){
 console.log(boundary)
 
 function addMarker(data){
+    let KTownResident = data.KtownResident
+    // create the turfJS point
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{ktownresident})
+    // put all the turfJS points into `allPoints`
+    allPoints.push(thisPoint)
     if(data.ktownresident == "Yes"){
         exampleOptions.fillColor = "lightblue"
         KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
@@ -169,6 +170,11 @@ function formatData(theData){
 
         map.fitBounds(allLayers.getBounds());        
 }
+
+L.control.layers(null,layers).addTo(map)
+
+
+collected.features.properties.values
 
 scroller
         .setup({

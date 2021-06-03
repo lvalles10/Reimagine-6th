@@ -1,4 +1,5 @@
-const map = L.map('map').setView([34.063634, -118.295405], 16);
+const map = L.map('map').setView([34.063634, -118.295405], 13);
+//changed zoom
 
 const url = "https://spreadsheets.google.com/feeds/list/1SuwSP45miCu_YN4_dKbZb1NAtOMC-P-Jv-iMCCrdZSE/od6/public/values?alt=json";
 
@@ -36,7 +37,7 @@ let exampleOptions = {
 let allLayers;
 
 // this is the boundary layer located as a geojson in the /data/ folder 
-const boundaryLayer = "../data/ca_counties.geojson"
+const boundaryLayer = "./data/la_zipcodes.geojson"
 let boundary; // place holder for the data
 let collected; // variable for turf.js collected points 
 let allPoints = []; // array for all the data points
@@ -94,7 +95,7 @@ function getBoundary(layer){
                     }
                     else{
                         // make the polygon gray and blend in with basemap if it doesn't have any values
-                        return{opacity:0,color = "#efefef" }
+                        return{opacity:0,color:"#efefef" } //ALbert: my bad! I did `color =` instead of `color:`
                     }
                 }
                 // add the geojson to the map
@@ -106,9 +107,11 @@ function getBoundary(layer){
 console.log(boundary)
 
 function addMarker(data){
-    let KTownResident = data.KtownResident
+    let kTownResidentData = data.KtownResident
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{ktownresident})
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{kTownResidentData}) //capitalization issue here!
+    // you want to use the KTownResident variable!
+
     // put all the turfJS points into `allPoints`
     allPoints.push(thisPoint)
     if(data.ktownresident == "Yes"){
@@ -168,13 +171,13 @@ function formatData(theData){
         console.log('boundary')
         console.log(boundary)
 
-        map.fitBounds(allLayers.getBounds());        
+        // dont need to fit all layers, just start at ktown first
+        // map.fitBounds(allLayers.getBounds());        
 }
 
-L.control.layers(null,layers).addTo(map)
 
-
-collected.features.properties.values
+// dont need this line!
+// collected.features.properties.values
 
 scroller
         .setup({
@@ -203,10 +206,10 @@ function scrollStepper(thisStep){
 }
 
 
-//let layers = {
-//	"Koreatown resident": KTownResident,
-	//"Not a Koreatown resident": NotKTownResident
-//}
+let layers = {
+	"Koreatown resident": KTownResident,
+	"Not a Koreatown resident": NotKTownResident
+}
 
 //L.control.layers(null,layers, {collapsed:false}).addTo(map)
 

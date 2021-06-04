@@ -13,7 +13,16 @@ body{
 #titleImage{
   max-width: 200px;
 }
-
+.sidebar-item {
+	padding: 10px;
+	background: rgb(245, 241, 237);
+	border: 3px solid white;
+	border-radius: 48px;
+	margin: 5px;
+	color: black;
+	cursor: pointer;
+	text-align: center;
+}
 
 header{
     grid-area: header;

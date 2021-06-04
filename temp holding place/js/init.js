@@ -42,13 +42,34 @@ let boundary; // place holder for the data
 let collected; // variable for turf.js collected points 
 let allPoints = []; // array for all the data points
 
+
+// 1. get the data sorted into the zipcodes o
+// 1a. assign data properties from the Survey into the object that is being passed into the turfJS polygon o
+// 2. get length of array for support within each Zipcode
+// 3. divide the progress bar by total number of values in the array
+// 4. do javascript .sort() to sort by alphabetical
+// 5. assign classes of the array based on "yes"/"no"/"unsure"
+// 6. create a loop for each of the segments
+// 6a. create if-statement to separate based on yes/no/unsure
+// 6b. let thisSegement = document.getElementById("")
+// 6c. thisSegement.set.attribute("class","yes")
+// 7 create a "progress" bar/pill/chart thingy
+// 8. using css assign segements based on .yes .no .unsure
+
+// simpler
+// 1. get data by zip
+// 2. get data into the progress bars by zip
+// 3. color data by yes/no/unsure by zip
+
+
+
 //function for clicking on polygons
 function onEachFeature(feature, layer) {
-    console.log(feature.properties)
+    // console.log(feature.properties)
     if (feature.properties.values) {
         //count the values within the polygon by using .length on the values array created from turf.js collect
         let count = feature.properties.values.length
-        console.log(count) // see what the count is on click
+        // console.log(count) // see what the count is on click
         let text = count.toString() // convert it to a string
         layer.bindPopup(text); //bind the pop up to the number
     }
@@ -81,16 +102,18 @@ function getBoundary(layer){
                 boundary = data
 
                 // run the turf collect geoprocessing
-                collected = turf.collect(boundary, thePoints, 'KTownResident', 'values');
+                collected = turf.collect(boundary, thePoints, 'support', 'values');
                 // just for fun, you can make buffers instead of the collect too:
                 // collected = turf.buffer(thePoints, 50,{units:'miles'});
-                console.log(collected.features)
-
+                // console.log('collected.features')
+                // console.log(collected.features)
+                
                 // here is the geoJson of the `collected` result:
                 L.geoJson(collected,{onEachFeature: onEachFeature,style:function(feature)
                 {
-                    console.log(feature)
+                    // console.log(feature)
                     if (feature.properties.values.length > 0) {
+                      console.log(feature)
                         return {color: "#ff0000",stroke: false};
                     }
                     else{
@@ -107,9 +130,15 @@ function getBoundary(layer){
 console.log(boundary)
 
 function addMarker(data){
-    let kTownResidentData = data.KtownResident
+    let kTownResidentData = data.ktownresident
+    let affiliation = data.affiliation
+    let age = data.age
+    let support = data.support
+    // console.log('data')
+    // console.log(data)
+
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{kTownResidentData}) //capitalization issue here!
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{kTownResidentData,affiliation, age, support}) //capitalization issue here!
     // you want to use the KTownResident variable!
 
     // put all the turfJS points into `allPoints`
@@ -164,6 +193,7 @@ function formatData(theData){
 
         // step 1: turn allPoints into a turf.js featureCollection
         thePoints = turf.featureCollection(allPoints)
+        console.log('thePoints')
         console.log(thePoints)
 
         // step 2: run the spatial analysis

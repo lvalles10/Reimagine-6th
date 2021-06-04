@@ -66,9 +66,11 @@ let allPoints = []; // array for all the data points
 //function for clicking on polygons
 function onEachFeature(feature, layer) {
     // console.log(feature.properties)
-    if (feature.properties.values) {
+    if (feature.properties.values.residentCount) {
         //count the values within the polygon by using .length on the values array created from turf.js collect
         let count = feature.properties.values.length
+
+        console.log(feature.properties.values.residentCount)
         // console.log(count) // see what the count is on click
         let text = count.toString() // convert it to a string
         layer.bindPopup(text); //bind the pop up to the number
@@ -92,6 +94,20 @@ function getStyles(data){
     return myStyle
 }
 
+// new function to count for kTown residents is `yes` or `no`
+function countChecker(dataField,counts,yesCount,noCount){
+  //
+  if (dataField == "Yes" && counts){
+    // we have to return an array because JavaScript can only handle returning 1 object
+    return [yesCount +=1,noCount]  // return this count value!
+  }
+  else if (dataField == "No" && counts){
+    return [yesCount, noCount +=1] // return this count value!
+  }
+  
+}
+
+
 function getBoundary(layer){
     fetch(layer)
     .then(response => {
@@ -102,24 +118,56 @@ function getBoundary(layer){
                 boundary = data
 
                 // run the turf collect geoprocessing
-                collected = turf.collect(boundary, thePoints, 'support', 'values');
+                collected = turf.collect(boundary, thePoints, 'surveyData', 'values'); //we can see the surveyData object for each Polygon now!
                 // just for fun, you can make buffers instead of the collect too:
                 // collected = turf.buffer(thePoints, 50,{units:'miles'});
                 // console.log('collected.features')
                 // console.log(collected.features)
-                
+
                 // here is the geoJson of the `collected` result:
                 L.geoJson(collected,{onEachFeature: onEachFeature,style:function(feature)
                 {
-                    // console.log(feature)
+                    // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
-                      console.log(feature)
+                      // for this Zipcode, set everything to 0 first using this residentCounts object
+                      let residentCounts = {
+                        "kTownresidentCount":0,
+                        "nonResidentCount":0
+                      }
+                      // forEach of the zipcodes we will use the zipCode counter to SET the values 
+                      // there is a `runningCount` _variable_ used to store the results of the 
+                      // countChecker _function_
+                      // the countChecker _function_ takes in ANY datafield, the residentCount object,
+                      // the kTownresidentCount property value, and the nonResidentCount property value
+                      // and returns it as an array where:
+                      // runningCount[0] is all the "Yes" counts in the Zipcode
+                      // runnningCount[1] is all the "No" counts in the Zipcode
+                      feature.properties.values.forEach(data=>{ 
+                          let runningCount = countChecker(data.kTownResident,residentCounts,residentCounts.kTownresidentCount,residentCounts.nonResidentCount);
+                          residentCounts.kTownresidentCount = runningCount[0];
+                          residentCounts.nonResidentCount=runningCount[1];
+                        })
+
+                      // We finally set the polygon value `kTownResidentTotal` to residentCounts.kTownresidentCount
+                      feature.properties.values.kTownresidentTotal = residentCounts.kTownresidentCount
+                      
+                      // We do the same for `nonResident total`
+                      feature.properties.values.nonResidentTotal = residentCounts.nonResidentCount
+
+                      // we can check our values here:
+                      console.log(feature.properties.values)
+
+                      //
+                      // To-Do: You need to create charts based on those values! :) 
+                      //
+
                         return {color: "#ff0000",stroke: false};
                     }
                     else{
                         // make the polygon gray and blend in with basemap if it doesn't have any values
-                        return{opacity:0,color:"#efefef" } //ALbert: my bad! I did `color =` instead of `color:`
+                        return{opacity:0,color:"#efefef" } //Albert: my bad! I did `color =` instead of `color:`
                     }
+                    
                 }
                 // add the geojson to the map
                     }).addTo(map)
@@ -130,15 +178,21 @@ function getBoundary(layer){
 console.log(boundary)
 
 function addMarker(data){
-    let kTownResidentData = data.ktownresident
-    let affiliation = data.affiliation
-    let age = data.age
-    let support = data.support
+    // Albert: I removed these variables and put them into the surveyData object!
+    // let kTownResidentData = data.ktownresident
+    // let affiliation = data.affiliation
+    // let age = data.age
+    // let support = data.support
     // console.log('data')
     // console.log(data)
-
+    let surveyData = {
+      "kTownResident":data.ktownresident,
+      "affiliation":data.affiliation, 
+      "age":data.age,
+      "support":data.support
+    } 
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{kTownResidentData,affiliation, age, support}) //capitalization issue here!
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
     // you want to use the KTownResident variable!
 
     // put all the turfJS points into `allPoints`

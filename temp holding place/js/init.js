@@ -160,7 +160,7 @@ function getBoundary(layer){
                       //
                       // To-Do: You need to create charts based on those values! :) 
                       //
-
+                        
                         return {color: "#ff0000",stroke: false};
                     }
                     else{
@@ -257,6 +257,27 @@ function formatData(theData){
 
         // dont need to fit all layers, just start at ktown first
         // map.fitBounds(allLayers.getBounds());        
+}
+
+// Lauren: Script for chart from w3schools. How to modify for project?
+var i = 0;
+function move() {
+  if (i == 0) {
+    i = 1;
+    var elem = document.getElementById("myBar");
+    var width = 10;
+    var id = setInterval(frame, 10);
+    function frame() {
+      if (width >= 100) {
+        clearInterval(id);
+        i = 0;
+      } else {
+        width++;
+        elem.style.width = width + "%";
+        elem.innerHTML = width  + "%";
+      }
+    }
+  }
 }
 
 

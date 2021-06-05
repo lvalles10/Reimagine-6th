@@ -48,6 +48,22 @@ header{
   width: 100%;
 }
 
+/* Lauren: Adding in CSS for the chart */
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+/* Lauren: How do I make the width correspond to .yes, .no, and .unsure? */
+#myBar {
+  width: 10%;
+  height: 30px;
+  background-color: #04AA6D;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+}
+
 /*Legend specific*/
 .legend {
   padding: 6px 8px;

@@ -121,11 +121,11 @@ function getStyles(data){
 // new function to count for kTown residents is `yes` or `no`
 function countChecker(dataField,counts,yesCount,noCount){
   //
-  if (dataField == "Yes" && counts){
+  if (data.support == "Yes" && counts){
     // we have to return an array because JavaScript can only handle returning 1 object
     return [yesCount +=1,noCount]  // return this count value!
   }
-  else if (dataField == "No" && counts){
+  else if (data.support == "No" && counts){
     return [yesCount, noCount +=1] // return this count value!
   }
   
@@ -154,9 +154,9 @@ function getBoundary(layer){
                     // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
                       // for this Zipcode, set everything to 0 first using this residentCounts object
-                      let residentCounts = {
-                        "kTownresidentCount":0,
-                        "nonResidentCount":0
+                      let supportCounts = {
+                        "YesCount":0,
+                        "NoCount":0
                       }
                       // forEach of the zipcodes we will use the zipCode counter to SET the values 
                       // there is a `runningCount` _variable_ used to store the results of the 
@@ -167,16 +167,16 @@ function getBoundary(layer){
                       // runningCount[0] is all the "Yes" counts in the Zipcode
                       // runnningCount[1] is all the "No" counts in the Zipcode
                       feature.properties.values.forEach(data=>{ 
-                          let runningCount = countChecker(data.kTownResident,residentCounts,residentCounts.kTownresidentCount,residentCounts.nonResidentCount);
-                          residentCounts.kTownresidentCount = runningCount[0];
-                          residentCounts.nonResidentCount=runningCount[1];
+                          let runningCount = countChecker(data.support,supportCounts,residentCounts.YesCount,supportCounts.NoCount);
+                          supportCounts.YesCount = runningCount[0];
+                          supportCounts.NoCount=runningCount[1];
                         })
 
                       // We finally set the polygon value `kTownResidentTotal` to residentCounts.kTownresidentCount
-                      feature.properties.values.kTownresidentTotal = residentCounts.kTownresidentCount
+                      feature.properties.values.YesTotal = supportCounts.YesCount
                       
                       // We do the same for `nonResident total`
-                      feature.properties.values.nonResidentTotal = residentCounts.nonResidentCount
+                      feature.properties.values.NoTotal = supportCounts.NoCount
 
                       // we can check our values here:
                       console.log(feature.properties.values)
@@ -215,7 +215,7 @@ function addMarker(data){
       "support":data.support
     } 
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],data.ktownresident) // Albert: i added the surveyData object here
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],data.support) // Albert: i added the surveyData object here
     // you want to use the KTownResident variable!, Lauren: Added this 6/5!
 
     // put all the turfJS points into `allPoints`

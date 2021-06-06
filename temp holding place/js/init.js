@@ -40,21 +40,45 @@ let allLayers;
 const boundaryLayer = "./data/la_zipcodes.geojson"
 let boundary; // place holder for the data
 let collected; // variable for turf.js collected points 
-let allPoints = []; // array for all the data points
+let allPoints = [data.Ktown_Resident,data.address,data.lat,data.lng,data.Meaningful,data.Relationship_Ktown,data.Pedestrian_Safety,data.affiliation,data.Community_Issues,data.Picture_Response,data.Gentrification,data.Support,data.Gender,data.Race,data.Age]; // array for all the data points
 
 
 // 1. get the data sorted into the zipcodes o
 // 1a. assign data properties from the Survey into the object that is being passed into the turfJS polygon o
-// 2. get length of array for support within each Zipcode
-// 3. divide the progress bar by total number of values in the array
+// 2. get length of array for support within each Zipcode; Lauren: I think I have the length but how to put in zipcode?
+var support = ["Yes", "No", "Unsure"]
+support.length
+// 3. divide the progress bar by total number of values in the array, Lauren: How to divide?
 // 4. do javascript .sort() to sort by alphabetical
+support.sort ("Yes", "No", "Unsure")
 // 5. assign classes of the array based on "yes"/"no"/"unsure"
-// 6. create a loop for each of the segments
-// 6a. create if-statement to separate based on yes/no/unsure
-// 6b. let thisSegement = document.getElementById("")
-// 6c. thisSegement.set.attribute("class","yes")
-// 7 create a "progress" bar/pill/chart thingy
-// 8. using css assign segements based on .yes .no .unsure
+                      var support = 0;
+                      function move() {
+                        if (support == "Yes") {
+                          support = 1;
+                          var elem = document.getElementById("myBar");
+                          document.set.attribute ("class","Yes")
+                          var width = 10;
+                          var id = setInterval(frame, 10);
+                          function frame() {
+                            if (width >= 100) {
+                              clearInterval(id);
+                              support = "Yes";
+                            } else {
+                              width++;
+                              elem.style.width = width + "%";
+                              elem.innerHTML = width  + "%";
+                            }
+                          }
+                        }
+                      } 
+
+// 6. create a loop for each of the segments - Lauren: I think I have above?
+// 6a. create if-statement to separate based on yes/no/unsure - Lauren: How to do all three?
+// 6b. let thisSegement = document.getElementById("") -Lauren: I think I have above?
+// 6c. thisSegement.set.attribute("class","yes") o
+// 7 create a "progress" bar/pill/chart thingy o
+// 8. using css assign segements based on .yes .no .unsure o Lauren: Not sure if this was done correctly!
 
 // simpler
 // 1. get data by zip
@@ -160,27 +184,7 @@ function getBoundary(layer){
                       //
                       // To-Do: You need to create charts based on those values! :) 
                       //
-                        // Lauren: Code for chart below. How to modify for project?
-                      var i = 0;
-                      function move() {
-                        if (i == 0) {
-                          i = 1;
-                          var elem = document.getElementById("myBar");
-                          var width = 10;
-                          var id = setInterval(frame, 10);
-                          function frame() {
-                            if (width >= 100) {
-                              clearInterval(id);
-                              i = 0;
-                            } else {
-                              width++;
-                              elem.style.width = width + "%";
-                              elem.innerHTML = width  + "%";
-                            }
-                          }
-                        }
-                      } 
-                        return {color: "#ff0000",stroke: false};
+                      return {color: "#ff0000",stroke: false};
                     }
                     else{
                         // make the polygon gray and blend in with basemap if it doesn't have any values
@@ -211,8 +215,8 @@ function addMarker(data){
       "support":data.support
     } 
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
-    // you want to use the KTownResident variable!
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],data.ktownresident) // Albert: i added the surveyData object here
+    // you want to use the KTownResident variable!, Lauren: Added this 6/5!
 
     // put all the turfJS points into `allPoints`
     allPoints.push(thisPoint)

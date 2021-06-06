@@ -40,8 +40,8 @@ let allLayers;
 const boundaryLayer = "./data/la_zipcodes.geojson"
 let boundary; // place holder for the data
 let collected; // variable for turf.js collected points 
-let allPoints = [data.Ktown_Resident,data.address,data.lat,data.lng,data.Meaningful,data.Relationship_Ktown,data.Pedestrian_Safety,data.affiliation,data.Community_Issues,data.Picture_Response,data.Gentrification,data.Support,data.Gender,data.Race,data.Age]; // array for all the data points
-
+let allPoints = []; // array for all the data points
+// you need this to be an empty array!
 
 // 1. get the data sorted into the zipcodes o
 // 1a. assign data properties from the Survey into the object that is being passed into the turfJS polygon o
@@ -118,14 +118,14 @@ function getStyles(data){
     return myStyle
 }
 
-// new function to count for kTown residents is `yes` or `no`
+// new function to count for kTown residents is `yes` or `no` // 6/6 Albert: this function was already generic (runs for any data so you did not need to modify it!! :(
 function countChecker(dataField,counts,yesCount,noCount){
-  //
-  if (data.support == "Yes" && counts){
+  // Albert: OH NO!!! you didn't need to change dataField.support!!! the data field is already set to support!
+  if (dataField == "Yes" && counts){
     // we have to return an array because JavaScript can only handle returning 1 object
     return [yesCount +=1,noCount]  // return this count value!
   }
-  else if (data.support == "No" && counts){
+  else if (dataField == "No" && counts){
     return [yesCount, noCount +=1] // return this count value!
   }
   
@@ -151,9 +151,11 @@ function getBoundary(layer){
                 // here is the geoJson of the `collected` result:
                 L.geoJson(collected,{onEachFeature: onEachFeature,style:function(feature)
                 {
+                    
                     // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
                       // for this Zipcode, set everything to 0 first using this residentCounts object
+                      console.log(feature)
                       let supportCounts = {
                         "YesCount":0,
                         "NoCount":0
@@ -166,8 +168,9 @@ function getBoundary(layer){
                       // and returns it as an array where:
                       // runningCount[0] is all the "Yes" counts in the Zipcode
                       // runnningCount[1] is all the "No" counts in the Zipcode
-                      feature.properties.values.forEach(data=>{ 
-                          let runningCount = countChecker(data.support,supportCounts,residentCounts.YesCount,supportCounts.NoCount);
+                      console.log(feature.properties)  
+                      feature.properties.values.forEach(data=>{ console.log(data)
+                          let runningCount = countChecker(data.support,supportCounts,supportCounts.YesCount,supportCounts.NoCount);
                           supportCounts.YesCount = runningCount[0];
                           supportCounts.NoCount=runningCount[1];
                         })
@@ -215,8 +218,8 @@ function addMarker(data){
       "support":data.support
     } 
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],data.support) // Albert: i added the surveyData object here
-    // you want to use the KTownResident variable!, Lauren: Added this 6/5!
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
+    // you want to use the KTownResident variable!, Lauren: Added this 6/5! //Albert: you needed to pass in the surveyData object still!!! because it has all the data!
 
     // put all the turfJS points into `allPoints`
     allPoints.push(thisPoint)

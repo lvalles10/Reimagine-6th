@@ -241,7 +241,7 @@ function createBar(support,zipcode){
   console.log("total responses:"+totalresponses)
   let newProgressbar = document.createElement("div");
   let targetProgressDiv = document.getElementById("card_"+zipcode)
-  // newProgressbar.innerHTML += `<div><h4>Total Responses:${totalresponses}</h4>`
+  // newProgressbar.innerHTML += `<h4>Total Responses:${totalresponses}</h4><div class="progressBar">`
   if (yes > 0){
     let supportwidth=(yes/totalresponses)*100
     // newProgressbar.setAttribute("class","yesBar")

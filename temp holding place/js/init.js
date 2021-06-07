@@ -38,23 +38,47 @@ let allLayers;
 
 // this is the boundary layer located as a geojson in the /data/ folder 
 const boundaryLayer = "./data/la_zipcodes.geojson"
-let boundary; // place holder for the data
+let boundary; // place holder for the data 
 let collected; // variable for turf.js collected points 
 let allPoints = []; // array for all the data points
-
+// you need this to be an empty array!
 
 // 1. get the data sorted into the zipcodes o
 // 1a. assign data properties from the Survey into the object that is being passed into the turfJS polygon o
-// 2. get length of array for support within each Zipcode
-// 3. divide the progress bar by total number of values in the array
+// 2. get length of array for support within each Zipcode; Lauren: I think I have the length but how to put in zipcode?
+var support = ["Yes", "No", "Unsure"]
+support.length
+// 3. divide the progress bar by total number of values in the array, Lauren: How to divide?
 // 4. do javascript .sort() to sort by alphabetical
+support.sort ("Yes", "No", "Unsure")
 // 5. assign classes of the array based on "yes"/"no"/"unsure"
-// 6. create a loop for each of the segments
-// 6a. create if-statement to separate based on yes/no/unsure
-// 6b. let thisSegement = document.getElementById("")
-// 6c. thisSegement.set.attribute("class","yes")
-// 7 create a "progress" bar/pill/chart thingy
-// 8. using css assign segements based on .yes .no .unsure
+                      var support = 0;
+                      function move() {
+                        if (support == "Yes") {
+                          support = 1;
+                          var elem = document.getElementById("myBar");
+                          document.set.attribute ("class","Yes")
+                          var width = 10;
+                          var id = setInterval(frame, 10);
+                          function frame() {
+                            if (width >= 100) {
+                              clearInterval(id);
+                              support = "Yes";
+                            } else {
+                              width++;
+                              elem.style.width = width + "%";
+                              elem.innerHTML = width  + "%";
+                            }
+                          }
+                        }
+                      } 
+
+// 6. create a loop for each of the segments - Lauren: I think I have above?
+// 6a. create if-statement to separate based on yes/no/unsure - Lauren: How to do all three?
+// 6b. let thisSegement = document.getElementById("") -Lauren: I think I have above?
+// 6c. thisSegement.set.attribute("class","yes") o
+// 7 create a "progress" bar/pill/chart thingy o
+// 8. using css assign segements based on .yes .no .unsure o Lauren: Not sure if this was done correctly!
 
 // simpler
 // 1. get data by zip
@@ -94,9 +118,9 @@ function getStyles(data){
     return myStyle
 }
 
-// new function to count for kTown residents is `yes` or `no`
+// new function to count for kTown residents is `yes` or `no` // 6/6 Albert: this function was already generic (runs for any data so you did not need to modify it!! :(
 function countChecker(dataField,counts,yesCount,noCount){
-  //
+  // Albert: OH NO!!! you didn't need to change dataField.support!!! the data field is already set to support!
   if (dataField == "Yes" && counts){
     // we have to return an array because JavaScript can only handle returning 1 object
     return [yesCount +=1,noCount]  // return this count value!
@@ -127,12 +151,14 @@ function getBoundary(layer){
                 // here is the geoJson of the `collected` result:
                 L.geoJson(collected,{onEachFeature: onEachFeature,style:function(feature)
                 {
+                    
                     // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
                       // for this Zipcode, set everything to 0 first using this residentCounts object
-                      let residentCounts = {
-                        "kTownresidentCount":0,
-                        "nonResidentCount":0
+                      console.log(feature)
+                      let supportCounts = {
+                        "YesCount":0,
+                        "NoCount":0
                       }
                       // forEach of the zipcodes we will use the zipCode counter to SET the values 
                       // there is a `runningCount` _variable_ used to store the results of the 
@@ -142,45 +168,33 @@ function getBoundary(layer){
                       // and returns it as an array where:
                       // runningCount[0] is all the "Yes" counts in the Zipcode
                       // runnningCount[1] is all the "No" counts in the Zipcode
-                      feature.properties.values.forEach(data=>{ 
-                          let runningCount = countChecker(data.kTownResident,residentCounts,residentCounts.kTownresidentCount,residentCounts.nonResidentCount);
-                          residentCounts.kTownresidentCount = runningCount[0];
-                          residentCounts.nonResidentCount=runningCount[1];
-                        })
-
+                      console.log(feature)  
+                      // THIS IS SO IMPORTANT!!!
+                      // LOOP FOR EACH ZIPCODE/BOUNDARY
+                      feature.properties.values.forEach(
+                        polygonData=>
+                          { console.log(polygonData)
+                          let runningCount = countChecker(polygonData.support,supportCounts,supportCounts.YesCount,supportCounts.NoCount);
+                          supportCounts.YesCount = runningCount[0];
+                          supportCounts.NoCount=runningCount[1];
+                          
+                          
+                          })
+                      
                       // We finally set the polygon value `kTownResidentTotal` to residentCounts.kTownresidentCount
-                      feature.properties.values.kTownresidentTotal = residentCounts.kTownresidentCount
+                      feature.properties.values.YesTotal = supportCounts.YesCount
                       
                       // We do the same for `nonResident total`
-                      feature.properties.values.nonResidentTotal = residentCounts.nonResidentCount
+                      feature.properties.values.NoTotal = supportCounts.NoCount
 
                       // we can check our values here:
                       console.log(feature.properties.values)
 
+                      createZipcodeContent(feature.properties)
                       //
                       // To-Do: You need to create charts based on those values! :) 
                       //
-                        // Lauren: Code for chart below. How to modify for project?
-                      var i = 0;
-                      function move() {
-                        if (i == 0) {
-                          i = 1;
-                          var elem = document.getElementById("myBar");
-                          var width = 10;
-                          var id = setInterval(frame, 10);
-                          function frame() {
-                            if (width >= 100) {
-                              clearInterval(id);
-                              i = 0;
-                            } else {
-                              width++;
-                              elem.style.width = width + "%";
-                              elem.innerHTML = width  + "%";
-                            }
-                          }
-                        }
-                      } 
-                        return {color: "#ff0000",stroke: false};
+                      return {color: "#ff0000",stroke: false};
                     }
                     else{
                         // make the polygon gray and blend in with basemap if it doesn't have any values
@@ -193,7 +207,10 @@ function getBoundary(layer){
         }
     )   
 }
-
+function sayHi(zipcode){
+  console.log('zipcode')
+  console.log(zipcode)
+}
 console.log(boundary)
 
 function addMarker(data){
@@ -202,32 +219,54 @@ function addMarker(data){
     // let affiliation = data.affiliation
     // let age = data.age
     // let support = data.support
-    // console.log('data')
-    // console.log(data)
+    console.log('data')
+    console.log(data)
     let surveyData = {
       "kTownResident":data.ktownresident,
       "affiliation":data.affiliation, 
       "age":data.age,
-      "support":data.support
+      "support":data.support,
+      "pedestrian":data.pedestrian_safety,
+      "community":data.communityissues,
+      "picture":data.pictureresponse,
+      "gentrification":data.gentrification
     } 
     // create the turfJS point
     let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
-    // you want to use the KTownResident variable!
+    // you want to use the KTownResident variable!, Lauren: Added this 6/5! //Albert: you needed to pass in the surveyData object still!!! because it has all the data!
 
     // put all the turfJS points into `allPoints`
     allPoints.push(thisPoint)
     if(data.ktownresident == "Yes"){
         exampleOptions.fillColor = "lightblue"
         KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        createButtons(data.lat,data.lng,data.address)
+        // createButtons(data.lat,data.lng,data.address)
         }
     else{
         exampleOptions.fillColor = "hotpink"
         NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        createButtons(data.lat,data.lng,data.address)
+        // createButtons(data.lat,data.lng,data.address)
     }
     return data.address, data.communityissues
 }
+function createZipcodeContent(zipcode){
+  console.log('zipcode')
+  console.log(zipcode)
+  const newButton = document.createElement("div");
+  newButton.id = "card_"+zipcode.name;
+  let newHTML = `<h3>${zipcode.name}</h3><div class="progressbar"></div>`
+  newButton.innerHTML = newHTML;
+  newButton.setAttribute("class","codes")
+  // newButton.setAttribute("class","progressbar") // add the class called "step" to the button or div
+  // newButton.setAttribute("data-step",newButton.id) // add a data-step for the button id to know which step we are on
+  // newButton.addEventListener('click', function(){
+  //     map.flyTo([lat,lng]);
+  // })
+  const spaceForZipcodes = document.getElementById('contents')
+  spaceForZipcodes.appendChild(newButton);
+}
+
+
 
 function createButtons(lat,lng,title){
     const newButton = document.createElement("button");

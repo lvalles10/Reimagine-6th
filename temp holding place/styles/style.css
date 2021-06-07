@@ -10,6 +10,11 @@ body{
     width: 99vw;
     ;
 }
+
+.codes{
+  padding:10px;
+  background-color:white;
+}
 #titleImage{
   max-width: 200px;
 }
@@ -52,9 +57,16 @@ header{
 #myProgress {
   width: 100%;
   background-color: grey;
+  border-radius: 16px; /* Albert: made it into a pill! you can modify/change this if you like it! */
 }
 
 /* Lauren: How do I make the width correspond to .yes, .no, and .unsure? */
+/* Albert: You need to do this in JavaScript! */
+/* Albert: Step 1, make sure this is a class! because you should have multiple of these! one per zipcode */
+/* Albert: Step 2: create different divs for each progress bar, one per zipcode */
+/* Albert: Step 3: Set the .css style "width" to the percent calculated when you divide the total by the number of support */
+/* Albert: Step 4: Add the divs to the progress bar container, note, you will need to create unique IDs for each container
+because each progress bar should be unique to each zipcode!  */
 #myBar {
   width: 10%;
   height: 30px;
@@ -62,6 +74,8 @@ header{
   text-align: center; /* To center it horizontally (if you want) */
   line-height: 30px; /* To center it vertically */
   color: white;
+  border-radius: 16px; /* Albert: made it into a pill! you can modify/change this if you like it! */
+  /* width: [temporary space holder] */
 }
 
 /*Legend specific*/

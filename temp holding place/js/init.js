@@ -38,7 +38,7 @@ let allLayers;
 
 // this is the boundary layer located as a geojson in the /data/ folder 
 const boundaryLayer = "./data/la_zipcodes.geojson"
-let boundary; // place holder for the data
+let boundary; // place holder for the data 
 let collected; // variable for turf.js collected points 
 let allPoints = []; // array for all the data points
 // you need this to be an empty array!
@@ -168,13 +168,19 @@ function getBoundary(layer){
                       // and returns it as an array where:
                       // runningCount[0] is all the "Yes" counts in the Zipcode
                       // runnningCount[1] is all the "No" counts in the Zipcode
-                      console.log(feature.properties)  
-                      feature.properties.values.forEach(data=>{ console.log(data)
-                          let runningCount = countChecker(data.support,supportCounts,supportCounts.YesCount,supportCounts.NoCount);
+                      console.log(feature)  
+                      // THIS IS SO IMPORTANT!!!
+                      // LOOP FOR EACH ZIPCODE/BOUNDARY
+                      feature.properties.values.forEach(
+                        polygonData=>
+                          { console.log(polygonData)
+                          let runningCount = countChecker(polygonData.support,supportCounts,supportCounts.YesCount,supportCounts.NoCount);
                           supportCounts.YesCount = runningCount[0];
                           supportCounts.NoCount=runningCount[1];
-                        })
-
+                          
+                          
+                          })
+                      
                       // We finally set the polygon value `kTownResidentTotal` to residentCounts.kTownresidentCount
                       feature.properties.values.YesTotal = supportCounts.YesCount
                       
@@ -184,6 +190,7 @@ function getBoundary(layer){
                       // we can check our values here:
                       console.log(feature.properties.values)
 
+                      createZipcodeContent(feature.properties)
                       //
                       // To-Do: You need to create charts based on those values! :) 
                       //
@@ -200,7 +207,10 @@ function getBoundary(layer){
         }
     )   
 }
-
+function sayHi(zipcode){
+  console.log('zipcode')
+  console.log(zipcode)
+}
 console.log(boundary)
 
 function addMarker(data){
@@ -209,13 +219,17 @@ function addMarker(data){
     // let affiliation = data.affiliation
     // let age = data.age
     // let support = data.support
-    // console.log('data')
-    // console.log(data)
+    console.log('data')
+    console.log(data)
     let surveyData = {
       "kTownResident":data.ktownresident,
       "affiliation":data.affiliation, 
       "age":data.age,
-      "support":data.support
+      "support":data.support,
+      "pedestrian":data.pedestrian_safety,
+      "community":data.communityissues,
+      "picture":data.pictureresponse,
+      "gentrification":data.gentrification
     } 
     // create the turfJS point
     let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
@@ -226,15 +240,33 @@ function addMarker(data){
     if(data.ktownresident == "Yes"){
         exampleOptions.fillColor = "lightblue"
         KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        createButtons(data.lat,data.lng,data.address)
+        // createButtons(data.lat,data.lng,data.address)
         }
     else{
         exampleOptions.fillColor = "hotpink"
         NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        createButtons(data.lat,data.lng,data.address)
+        // createButtons(data.lat,data.lng,data.address)
     }
     return data.address, data.communityissues
 }
+function createZipcodeContent(zipcode){
+  console.log('zipcode')
+  console.log(zipcode)
+  const newButton = document.createElement("div");
+  newButton.id = "card_"+zipcode.name;
+  let newHTML = `<h3>${zipcode.name}</h3><div class="progressbar"></div>`
+  newButton.innerHTML = newHTML;
+  newButton.setAttribute("class","codes")
+  // newButton.setAttribute("class","progressbar") // add the class called "step" to the button or div
+  // newButton.setAttribute("data-step",newButton.id) // add a data-step for the button id to know which step we are on
+  // newButton.addEventListener('click', function(){
+  //     map.flyTo([lat,lng]);
+  // })
+  const spaceForZipcodes = document.getElementById('contents')
+  spaceForZipcodes.appendChild(newButton);
+}
+
+
 
 function createButtons(lat,lng,title){
     const newButton = document.createElement("button");

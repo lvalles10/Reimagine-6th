@@ -10,6 +10,11 @@ body{
     width: 99vw;
     ;
 }
+
+.codes{
+  padding:10px;
+  background-color:white;
+}
 #titleImage{
   max-width: 200px;
 }

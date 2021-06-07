@@ -213,6 +213,56 @@ function sayHi(zipcode){
 }
 console.log(boundary)
 
+function createZipcodeContent(zipcode){
+  console.log('zipcode')
+  console.log(zipcode)
+  const newButton = document.createElement("div");
+  newButton.id = "card_"+zipcode.name;
+  let newHTML = `<h3>${zipcode.name}</h3><div class="progressbar"></div>`
+  
+  newButton.innerHTML = newHTML;
+  newButton.setAttribute("class","codes")
+  // newButton.setAttribute("class","progressbar") // add the class called "step" to the button or div
+  // newButton.setAttribute("data-step",newButton.id) // add a data-step for the button id to know which step we are on
+  // newButton.addEventListener('click', function(){
+  //     map.flyTo([lat,lng]);
+  // })
+  const spaceForZipcodes = document.getElementById('contents')
+  spaceForZipcodes.appendChild(newButton);
+  createBar(zipcode.values,zipcode.name)
+}
+
+function createBar(support,zipcode){
+  console.log(support)
+  // console.log(support.YesTotal)
+  let yes = support.YesTotal
+  let no = support.NoTotal
+  let totalresponses = yes + no
+  console.log("total responses:"+totalresponses)
+  let newProgressbar = document.createElement("div");
+  let targetProgressDiv = document.getElementById("card_"+zipcode)
+  // newProgressbar.innerHTML += `<div><h4>Total Responses:${totalresponses}</h4>`
+  if (yes > 0){
+    let supportwidth=(yes/totalresponses)*100
+    // newProgressbar.setAttribute("class","yesBar")
+    newProgressbar.innerHTML += `<div class='yesBar' style="width:${supportwidth}%">Yes</div>`
+    console.log(newProgressbar)
+    console.log(supportwidth)
+    targetProgressDiv.appendChild(newProgressbar);
+
+  }
+
+  if (no > 0){
+    let supportwidth=(no/totalresponses)*100
+    newProgressbar.innerHTML += `<div class='noBar' style="width:${supportwidth}%">No</div>`
+    targetProgressDiv.appendChild(newProgressbar);
+    console.log(supportwidth)
+  }
+  // newProgressbar.innerHTML += "</div>"
+}
+
+
+
 function addMarker(data){
     // Albert: I removed these variables and put them into the surveyData object!
     // let kTownResidentData = data.ktownresident
@@ -249,23 +299,6 @@ function addMarker(data){
     }
     return data.address, data.communityissues
 }
-function createZipcodeContent(zipcode){
-  console.log('zipcode')
-  console.log(zipcode)
-  const newButton = document.createElement("div");
-  newButton.id = "card_"+zipcode.name;
-  let newHTML = `<h3>${zipcode.name}</h3><div class="progressbar"></div>`
-  newButton.innerHTML = newHTML;
-  newButton.setAttribute("class","codes")
-  // newButton.setAttribute("class","progressbar") // add the class called "step" to the button or div
-  // newButton.setAttribute("data-step",newButton.id) // add a data-step for the button id to know which step we are on
-  // newButton.addEventListener('click', function(){
-  //     map.flyTo([lat,lng]);
-  // })
-  const spaceForZipcodes = document.getElementById('contents')
-  spaceForZipcodes.appendChild(newButton);
-}
-
 
 
 function createButtons(lat,lng,title){

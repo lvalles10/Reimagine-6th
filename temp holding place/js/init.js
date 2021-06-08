@@ -218,7 +218,7 @@ function createZipcodeContent(zipcode){
   console.log(zipcode)
   const newButton = document.createElement("div");
   newButton.id = "card_"+zipcode.name;
-  let newHTML = `<h3>${zipcode.name}</h3><div class="progressbar"></div>`
+  let newHTML = `<h3 class="cardTitle">${zipcode.name}</h3>`
   
   newButton.innerHTML = newHTML;
   newButton.setAttribute("class","codes")
@@ -233,32 +233,56 @@ function createZipcodeContent(zipcode){
 }
 
 function createBar(support,zipcode){
-  console.log(support)
-  // console.log(support.YesTotal)
+  // console.log(support)
   let yes = support.YesTotal
   let no = support.NoTotal
   let totalresponses = yes + no
-  console.log("total responses:"+totalresponses)
-  let newProgressbar = document.createElement("div");
-  let targetProgressDiv = document.getElementById("card_"+zipcode)
-  // newProgressbar.innerHTML += `<h4>Total Responses:${totalresponses}</h4><div class="progressBar">`
-  if (yes > 0){
-    let supportwidth=(yes/totalresponses)*100
-    // newProgressbar.setAttribute("class","yesBar")
-    newProgressbar.innerHTML += `<div class='yesBar' style="width:${supportwidth}%">Yes</div>`
-    console.log(newProgressbar)
-    console.log(supportwidth)
-    targetProgressDiv.appendChild(newProgressbar);
 
+  // add the unique ID for each zipcode
+  // this makes sure we don't override other zipcodes charts
+  let targetProgressDiv = document.getElementById("card_"+zipcode)
+
+  // create the new div for the progress bar to exist in!
+  // we will add this at the end of this entire function.
+  let progressBar = document.createElement("div");
+
+  // add the class "progressBar" to the progressBar to make it easier to style in style.css
+  progressBar.classList.add("progressBar");
+  
+  // add the title to each zipcode card:
+  targetProgressDiv.innerHTML += `<h4 class="header">Total Responses:${totalresponses}</h4>`
+
+  // if anyone responded yes:
+  if (yes > 0){
+    let progressBarPart = document.createElement("div"); // create a new div for this part of the progress bar
+    let yesResponseFraction = yes/totalresponses // get the % 
+    progressBarPart.className = "yesBar"; // use our pre-defined class called .yesBar
+    let thisProgressLegend = document.createElement("div"); // this is for the text legend
+    thisProgressLegend.innerHTML = "Yes "+ (yesResponseFraction)*100 + "%" // this creates our text legend
+    progressBar.style.gridTemplateColumns += `${yesResponseFraction}fr ` // have css-grid automatically scale our progressBar chart!
+    progressBar.appendChild(progressBarPart); // add this progress bar part to our progressBar div!
+    progressBarPart.appendChild(thisProgressLegend) // add the legend too!
   }
 
   if (no > 0){
-    let supportwidth=(no/totalresponses)*100
-    newProgressbar.innerHTML += `<div class='noBar' style="width:${supportwidth}%">No</div>`
-    targetProgressDiv.appendChild(newProgressbar);
-    console.log(supportwidth)
+    let progressBarPart = document.createElement("div");
+    let thisProgressLegend = document.createElement("div");
+    let noResponseFraction = no/totalresponses
+    progressBarPart.className = "noBar";
+    progressBar.style.gridTemplateColumns += ` ${noResponseFraction}fr`
+
+    // We need this if-statement because the .noBar class targets gridColumn 2 by default, 
+    // gridColum 2 does not exist if there is no "yes" responses :( see the style.css for .noBar
+    if (!yes){
+      progressBarPart.style.gridColumn = 1;
+    }
+    thisProgressLegend.innerHTML = "No "+ (noResponseFraction)*100 + "%"
+    progressBar.appendChild(progressBarPart);
+    progressBarPart.appendChild(thisProgressLegend) 
   }
-  // newProgressbar.innerHTML += "</div>"
+  // The END!!!!
+  // Finally add the progressBar for this zipcode to the contents!
+  targetProgressDiv.appendChild(progressBar)
 }
 
 

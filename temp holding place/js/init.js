@@ -276,7 +276,7 @@ function getStoriesFromZipcode(event,zipcode,stories){
   // "gentrification":data.gentrification
   let barChartCheck = "barChart_"+thisZip
   let storyCheck = "storyFor_"+thisZip
-  let theProgressBars = document.getElementById(barChartCheck);
+  let theProgressBars = document.getElementById(barChartCheck)
   let theStoryBox = document.getElementById(storyCheck);
   // console.log(theProgressBars.style.display)
   if (theProgressBars.className.includes('hiddenClass')){
@@ -326,10 +326,11 @@ function createZipcodeContent(zipcode){
   zipcode.values.forEach(data=>theStories.push(data.community))
   console.log(theStories)
 
-  
-  zipCodeStories.innerHTML = "<h3>Community Stories</h3><ul>"+  theStories.map(function (story) {
+
+  zipCodeStories.innerHTML = "<h3>What community issues are most important to you in Koreatown? Are there any amenities we can incorporate in the project to address them?</h3><ul>"+  theStories.map(function (story) {
     return '<li>' + story + '</li>';
   }).join('')+"</ul>"
+  // console.log(zipcode.values)
   // console.log(zipcode.values)
   
   // newButton.setAttribute("class","progressbar") // add the class called "step" to the button or div
@@ -342,6 +343,9 @@ function createZipcodeContent(zipcode){
   spaceForZipcodes.appendChild(newButton);
   createBar(zipcode.values,zipcode.name)
 }
+
+
+// Anything is related to creating the YES/NO progress bars
 
 function createBar(support,zipcode){
   // console.log(support)
@@ -362,7 +366,8 @@ function createBar(support,zipcode){
   progressBar.id = "barChart_"+zipcode
   progressBar.style.display = "grid"
   // add the title to each zipcode card:
-  targetProgressDiv.innerHTML += `<h4 class="header">Total Responses:${totalresponses}</h4>`
+  targetProgressDiv.innerHTML +=`<h4 class="header">Total Responses: ${totalresponses}</h4>`
+
 
   // if anyone responded yes:
   if (yes > 0){
@@ -445,7 +450,6 @@ function addMarker(data){
           nonGeographicKtownNonResident.push(surveyData)
           }
     }
-
     return data.address, data.communityissues
 }
 

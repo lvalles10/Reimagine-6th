@@ -24,55 +24,57 @@
 
         <!-- Adding the TurfJs library  -->
         <script src='https://unpkg.com/@turf/turf@6.3.0/turf.min.js'></script>
+
+
+        <style>
+            h2 {text-align: center;}
+h1 {text-align: center;}
+
+            </style>
+
+    
+            <style>
+                .button {
+                  border: none;
+                  color: black;
+                  padding: 15px 32px;
+                  text-align: center;
+                  text-decoration: none;
+                  display: inline-block;
+                  font-size: 16px;
+                  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                  margin: 4px 2px;
+                  cursor: pointer;
+                }
+                
+                .button1 {background-color: white; border-radius: 8px;margin-left:auto;margin-right: auto;} 
+                .button2 {background-color: white;border-radius: 8px;margin-left:auto;margin-right: auto;} 
+                .button3 {background-color: white;border-radius: 8px;margin-left:auto;margin-right: auto;}
+                .button4 {padding: 8px 18px; font-size:10px; border-radius: 4px;}
+                
+                
+                </style>
     </head>
     
      <body>
         <header>
-            <style>
-                h2 {text-align: center;}
-h1 {text-align: center;}
-
-                </style>
-                <a href="https://github.com/lvalles10/Reimagine-6th" target="_blank"><button class="button button4">Github</button></a>
-                <a href="mailto:reimagining6th@gmail.com" target="_blank"><button class="button button4">Contact Us</button></a>
-            <h1 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
+            <h1 id="title" style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
                 Reimagine 6th Street
             </h1>
-    
-            <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-                Contribute your thoughts regarding the project by taking the survey below! </p><h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-            <div id="languageMenu">
-    
-        
-                <style>
-                    .button {
-                      border: none;
-                      color: black;
-                      padding: 15px 32px;
-                      text-align: center;
-                      text-decoration: none;
-                      display: inline-block;
-                      font-size: 16px;
-                      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-                      margin: 4px 2px;
-                      cursor: pointer;
-                    }
-                    
-                    .button1 {background-color: white; border-radius: 8px;} 
-                    .button2 {background-color: white;border-radius: 8px;} 
-                    .button3 {background-color: white;border-radius: 8px;}
-                    .button4 {padding: 8px 18px; font-size:10px; border-radius: 4px;}
-                    
-                    
-                    </style>
-                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u" target="_blank"><button class="button button1">English</button></a>
-                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=es-mx" target="_blank"><button class="button button2">Español</button></a>
-                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=ko" target="_blank"><button class="button button3">한국어</button></a>
+            
+            <div id="google_translate_element">
+                <div id="languageMenu">
+                            
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u" target="_blank"><button class="button button4">English Survey</button></a>
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=es-mx" target="_blank"><button class="button button4">Encuesta en Español</button></a>
+                    <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=ko" target="_blank"><button class="button button4">한국 설문 조사</button></a>
+                </div>
+                <div>
+                    <a href="https://github.com/lvalles10/Reimagine-6th" target="_blank"><button class="button button4">Github</button></a>
+                    <a href="mailto:reimagining6th@gmail.com" target="_blank"><button class="button button4">Contact Us</button></a>
+                    <button class="button button4" id="myBtn">About</button>
+                </div>
             </div>
-            </div>
-            <button id="myBtn">Open Modal</button>
-                        
-            <div id="google_translate_element"></div>
 
             <script type="text/javascript">
             function googleTranslateElementInit() {
@@ -81,6 +83,13 @@ h1 {text-align: center;}
             </script>
 
             <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        
+               
+                
+            </div>
+            
+                        
+
         </header> <!-- Hello! you forgot to close the header! -->
         <div id="contents">
 
@@ -99,7 +108,7 @@ h1 {text-align: center;}
             <!-- Modal content -->
             <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Reimagining 6th Street</h2>
+            <h2 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Reimagining 6th Street</h2>
             <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">"Reimagine 6th Street" is a project to repurpose 6th Street in Koreatown from Normandie Ave. to Vermont Ave. for a public pedestrian plaza to support existing Koreatown community members and stakeholders. 
                 The goals of this project are three-fold: to provide open-space in Koreatown, reduce traffic violence, and boost existing small businesses. </p>
 
@@ -111,40 +120,7 @@ h1 {text-align: center;}
             </div>
         </div>
 
-        <!-- Slideshow container -->
-<div class="slideshow-container">
-
-    <!-- Full-width images with number and caption text -->
-    <div class="mySlides fade">
-      <div class="numbertext">1 / 3</div>
-      <img src="img1.jpg" style="width:100%">
-      <div class="text">Caption Text</div>
-    </div>
-  
-    <div class="mySlides fade">
-      <div class="numbertext">2 / 3</div>
-      <img src="img2.jpg" style="width:100%">
-      <div class="text">Caption Two</div>
-    </div>
-  
-    <div class="mySlides fade">
-      <div class="numbertext">3 / 3</div>
-      <img src="img3.jpg" style="width:100%">
-      <div class="text">Caption Three</div>
-    </div>
-  
-    <!-- Next and previous buttons -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-  </div>
-  <br>
-  
-  <!-- The dots/circles -->
-  <div style="text-align:center">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-  </div>
+       
 
         <script src="js/init.js"></script>
         <footer>

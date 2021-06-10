@@ -6,15 +6,25 @@ body{
     background-image: url(https://i0.wp.com/css-tricks.com/wp-content/uploads/2018/07/scrolling-gradient.png?fit=1200%2C600&ssl=1);
     background-attachment: fixed;
     background-size: cover;
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
     height: 90vh; /* this makes our page cover the whole browser window*/
     width: 99vw;
     ;
 }
 
+header {
+	grid-area: header;
+	color: white;
+	display: grid;
+	grid-template-columns: repeat(2,1fr);
+	grid-template-rows: repeat(2, .3fr);
+  padding: 10px
+}
+
 .zipstories{
   display: none;
   grid-row: 3;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .hiddenClass{
@@ -47,6 +57,13 @@ h4 .header{
 .cardTitle{
   grid-column: 1 / span 3;
   grid-row: 1;  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.languageMenu{
+  margin-left:auto;
+  margin-right:auto;
+
 }
 
 
@@ -58,6 +75,7 @@ h4 .header{
   padding:10px;
   background-color:rgb(225, 199, 247);
   border-radius: 5px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* ---------styles for the progress bar ----------- */
@@ -113,6 +131,7 @@ h4 .header{
 header{
     grid-area: header;
     color: white
+
 }
 
 

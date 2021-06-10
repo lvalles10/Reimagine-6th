@@ -34,6 +34,17 @@ let exampleOptions = {
     fillOpacity: 0.4
 };
 
+const ktown = "./data/ktown.geojson"
+fetch(ktown)
+	.then(response => {
+		return response.json();
+		})
+    .then(data =>{
+                // console.log(data)
+                L.geoJson(data,{style:exampleOptions}).addTo(map)
+        }
+)
+
 let allLayers;
 
 // this is the boundary layer located as a geojson in the /data/ folder 
@@ -158,7 +169,7 @@ function getBoundary(layer){
                     // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
                       // for this Zipcode, set everything to 0 first using this residentCounts object
-                      console.log(feature)
+                      // console.log(feature)
                       let supportCounts = {
                         "YesCount":0,
                         "NoCount":0
@@ -171,12 +182,13 @@ function getBoundary(layer){
                       // and returns it as an array where:
                       // runningCount[0] is all the "Yes" counts in the Zipcode
                       // runnningCount[1] is all the "No" counts in the Zipcode
-                      console.log(feature)  
+                      // console.log(feature)  
                       // THIS IS SO IMPORTANT!!!
                       // LOOP FOR EACH ZIPCODE/BOUNDARY
                       feature.properties.values.forEach(
                         polygonData=>
-                          { console.log(polygonData)
+                          { 
+                            // console.log(polygonData)
                           let runningCount = countChecker(polygonData.support,supportCounts,supportCounts.YesCount,supportCounts.NoCount);
                           supportCounts.YesCount = runningCount[0];
                           supportCounts.NoCount=runningCount[1];
@@ -191,7 +203,7 @@ function getBoundary(layer){
                       feature.properties.values.NoTotal = supportCounts.NoCount
 
                       // we can check our values here:
-                      console.log(feature.properties.values)
+                      // console.log(feature.properties.values)
 
                       createZipcodeContent(feature.properties)
                       //
@@ -206,22 +218,31 @@ function getBoundary(layer){
                     
                 }
                 // add the geojson to the map
-                    }).addTo(map)
+                    })
+                    // .addTo(map) //Albert: removed zipcode on map
         }
     )   
 }
 function sayHi(zipcode){
   console.log('zipcode')
-  console.log(zipcode)
+  // console.log(zipcode)
 }
-console.log(boundary)
 
-function createZipcodeContent(zipcode){
-  console.log('zipcode')
-  console.log(zipcode)
+const typesResident = {
+  "resident":"KTown Resident",
+  "nonresident":"Non-KTown Resident",
+}
+// console.log(boundary)
+function createNonZipcodeContent(general,type){
+  console.log(general)
+  // let 
+  // let 
+  let cleanType = typesResident[type]
+  console.log(cleanType)
   const newButton = document.createElement("div");
-  newButton.id = "card_"+zipcode.name;
-  let newHTML = `<h3 class="cardTitle">${zipcode.name}</h3>`
+  let theId = "nonGeo"+type;
+  newButton.id = "card_"+theId
+  let newHTML = `<h3 class="cardTitle">${cleanType}</h3>`
   
   newButton.innerHTML = newHTML;
   newButton.setAttribute("class","codes")
@@ -230,7 +251,94 @@ function createZipcodeContent(zipcode){
   // newButton.addEventListener('click', function(){
   //     map.flyTo([lat,lng]);
   // })
-  const spaceForZipcodes = document.getElementById('contents')
+  let thisTypesYesNo = 
+  {
+    'YesTotal':nonGeoYesData = general.reduce((yesData,general)=>(general.support=='Yes')?yesData+1:0),
+    'NoTotal':nonGeoNoData = general.reduce((noData,general)=>(general.support=='No')?noData+1:0)
+  }
+  
+  console.log(theId)
+  console.log(theId)
+  const spaceForOtherBoundaries = document.getElementById('contents')
+  spaceForOtherBoundaries.appendChild(newButton);
+  createBar(thisTypesYesNo,theId)
+}
+function getStoriesFromZipcode(event,zipcode,stories){
+  // if(event.target.className[0].value == "cardTitle"){
+  // }
+  // e.target.parentNode.id
+  let thisZip = event.currentTarget.attributes.id.value.replace("card_","").replace("barChart_","")
+  console.log(thisZip)
+  // console.log(event.target.attributes)
+  // "pedestrian":data.pedestrian_safety,
+  // "community":data.communityissues,
+  // "picture":data.pictureresponse,
+  // "gentrification":data.gentrification
+  let barChartCheck = "barChart_"+thisZip
+  let storyCheck = "storyFor_"+thisZip
+  let theProgressBars = document.getElementById(barChartCheck);
+  let theStoryBox = document.getElementById(storyCheck);
+  // console.log(theProgressBars.style.display)
+  if (theProgressBars.className.includes('hiddenClass')){
+    console.log('hi')
+    theProgressBars.classList.remove("hiddenClass");
+    theStoryBox.classList.remove("visibleClass");
+  }
+  else{
+    console.log('no')
+    theProgressBars.classList.add("hiddenClass");
+    theStoryBox.classList.add("visibleClass");
+  }
+//   let state = document.getElementById(barChartCheck).style.display
+//   if (state == 'block') {
+//     document.getElementById(barChartCheck).style.display = 'none';
+// } else {
+//     document.getElementById(barChartCheck).style.display = 'block';
+// }
+  // let theStories = document.getElementById(storyCheck);
+  // if(!theProgressBars){
+  //   theProgressBars.className = "hidden"
+  //   theStories.style.display = "none"
+  // }
+  // else{
+  //   theProgressBars.style.display = "none"
+  //   theStories.style.display = "grid"
+  // }
+  
+  console.log(barChartCheck)
+}
+function createZipcodeContent(zipcode){
+  console.log('zipcode')
+  // console.log(zipcode)
+  const newButton = document.createElement("div");
+  newButton.id = "card_"+zipcode.name;
+  let newHTML = `<h3 class="cardTitle">${zipcode.name}</h3>`
+  newButton.addEventListener('click',getStoriesFromZipcode)
+  newButton.innerHTML = newHTML;
+  newButton.setAttribute("class","codes")
+  newButton.setAttribute("surveyData",zipcode.values)
+
+  const zipCodeStories = document.createElement("div");
+  zipCodeStories.setAttribute("class","zipstories")
+  zipCodeStories.setAttribute("id",`storyFor_${zipcode.name}`)
+  zipCodeStories.addEventListener('click',getStoriesFromZipcode)
+  let theStories=[];
+  zipcode.values.forEach(data=>theStories.push(data.community))
+  console.log(theStories)
+
+  
+  zipCodeStories.innerHTML = "<h3>Community Stories</h3><ul>"+  theStories.map(function (story) {
+    return '<li>' + story + '</li>';
+  }).join('')+"</ul>"
+  // console.log(zipcode.values)
+  
+  // newButton.setAttribute("class","progressbar") // add the class called "step" to the button or div
+  // newButton.setAttribute("data-step",newButton.id) // add a data-step for the button id to know which step we are on
+  // newButton.addEventListener('click', function(){
+    //     map.flyTo([lat,lng]);
+    // })
+    const spaceForZipcodes = document.getElementById('contents')
+    newButton.appendChild(zipCodeStories);
   spaceForZipcodes.appendChild(newButton);
   createBar(zipcode.values,zipcode.name)
 }
@@ -251,7 +359,8 @@ function createBar(support,zipcode){
 
   // add the class "progressBar" to the progressBar to make it easier to style in style.css
   progressBar.classList.add("progressBar");
-  
+  progressBar.id = "barChart_"+zipcode
+  progressBar.style.display = "grid"
   // add the title to each zipcode card:
   targetProgressDiv.innerHTML += `<h4 class="header">Total Responses:${totalresponses}</h4>`
 
@@ -285,10 +394,14 @@ function createBar(support,zipcode){
   }
   // The END!!!!
   // Finally add the progressBar for this zipcode to the contents!
+  if (!zipcode){
+
+  }
   targetProgressDiv.appendChild(progressBar)
 }
 
-
+let nonGeographicKtownResident = []
+let nonGeographicKtownNonResident = []
 
 function addMarker(data){
     // Albert: I removed these variables and put them into the surveyData object!
@@ -308,8 +421,8 @@ function addMarker(data){
       "picture":data.pictureresponse,
       "gentrification":data.gentrification
     } 
-    console.log(data)
-    console.log(data.lat_2)
+    // console.log(data)
+    // console.log(data.lat_2)
     // create the turfJS point
     let thisPoint = turf.point([Number(data.lng),Number(data.lat_2)],{surveyData}) // Albert: i added the surveyData object here
     // you want to use the KTownResident variable!, Lauren: Added this 6/5! //Albert: you needed to pass in the surveyData object still!!! because it has all the data!
@@ -320,12 +433,19 @@ function addMarker(data){
         exampleOptions.fillColor = "lightblue"
         KTownResident.addLayer(L.circleMarker([data.lat_2,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
         // createButtons(data.lat_2,data.lng,data.address)
+          if(data.lat_2 == 0){
+          nonGeographicKtownResident.push(surveyData)
+          }
         }
     else{
         exampleOptions.fillColor = "hotpink"
         NotKTownResident.addLayer(L.circleMarker([data.lat_2,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
         // createButtons(data.lat_2,data.lng,data.address)
+        if(data.lat_2 == 0){
+          nonGeographicKtownNonResident.push(surveyData)
+          }
     }
+
     return data.address, data.communityissues
 }
 
@@ -361,6 +481,8 @@ function formatData(theData){
         console.log('boundary')
         console.log(boundary)
         formattedData.forEach(addMarker)
+        // createNonZipcodeContent(nonGeographicKtownResident,'resident')
+        // createNonZipcodeContent(nonGeographicKtownNonResident,'nonresident')
         KTownResident.addTo(map)
         NotKTownResident.addTo(map)
         let allLayers = L.featureGroup([KTownResident,NotKTownResident]);
@@ -426,9 +548,13 @@ var legend = L.control({ position: "bottomleft" });
 legend.onAdd = function(map) {
   var div = L.DomUtil.create("div", "legend");
   div.innerHTML += "<h4>Legend</h4>";
+  div.innerHTML += '<i style="background: orange"></i><span id="ktownResident">Wilshire Corridor Koreatown Neighborhood Boundary</span><br>';
+  // div.innerHTML += '<i style="background: pink"></i><span id="notktownResident">Not Koreatown Resident</span><br>';
+// old legend:
   div.innerHTML += '<i style="background: lightblue"></i><span id="ktownResident">Koreatown Resident</span><br>';
   div.innerHTML += '<i style="background: pink"></i><span id="notktownResident">Not Koreatown Resident</span><br>';
- // div.innerHTML += '<i style="background: #E6E696"></i><span>Land</span><br>';
+
+  // div.innerHTML += '<i style="background: #E6E696"></i><span>Land</span><br>';
  //div.innerHTML += '<i style="background: #E8E6E0"></i><span>Residential</span><br>';
  // div.innerHTML += '<i style="background: #FFFFFF"></i><span>Ice</span><br>';
   //div.innerHTML += '<i class="icon" style="background-image: url(https://d30y9cdsu7xlg0.cloudfront.net/png/194515-200.png);background-repeat: no-repeat;"></i><span>Grænse</span><br>';

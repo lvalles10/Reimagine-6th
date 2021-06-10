@@ -232,6 +232,10 @@ function createZipcodeContent(zipcode){
   createBar(zipcode.values,zipcode.name)
 }
 
+function showStories(theZipCodeClicked){
+
+}
+
 function createBar(support,zipcode){
   // console.log(support)
   let yes = support.YesTotal

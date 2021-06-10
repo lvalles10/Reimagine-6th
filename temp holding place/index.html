@@ -28,18 +28,47 @@
     
      <body>
         <header>
-            <h2 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-                Welcome to Reimagine 6th Street!
-            </h2>
+            <style>
+                h2 {text-align: center;}
+h1 {text-align: center;}
+
+                </style>
+                <a href="https://github.com/lvalles10/Reimagine-6th" target="_blank"><button class="button button4">Github</button></a>
+                <a href="mailto:reimagining6th@gmail.com" target="_blank"><button class="button button4">Contact Us</button></a>
+            <h1 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" >
+                Reimagine 6th Street
+            </h1>
     
             <p style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
-                "Reimagine 6th Street" is a project to repurpose 6th Street in Koreatown
-            from Normandie Ave. to Vermont Ave. for a public pedestrian plaza to support existing Koreatown community members and stakeholders. 
-            The goals of this project are three-fold: to provide open-space in Koreatown, reduce traffic violence, and boost existing small businesses. Contribute your thoughts regarding the project by taking the survey below! </p><h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
+                Contribute your thoughts regarding the project by taking the survey below! </p><h3 style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">
             <div id="languageMenu">
-                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u" target="_blank"><button>English</button></a>
-                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=es-mx" target="_blank"><button>Español</button></a>
-                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=ko" target="_blank"><button>한국어</button></a>
+    
+        
+                <style>
+                    .button {
+                      border: none;
+                      color: black;
+                      padding: 15px 32px;
+                      text-align: center;
+                      text-decoration: none;
+                      display: inline-block;
+                      font-size: 16px;
+                      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                      margin: 4px 2px;
+                      cursor: pointer;
+                    }
+                    
+                    .button1 {background-color: white; border-radius: 8px;} 
+                    .button2 {background-color: white;border-radius: 8px;} 
+                    .button3 {background-color: white;border-radius: 8px;}
+                    .button4 {padding: 8px 18px; font-size:10px; border-radius: 4px;}
+                    
+                    
+                    </style>
+                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u" target="_blank"><button class="button button1">English</button></a>
+                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=es-mx" target="_blank"><button class="button button2">Español</button></a>
+                <a href="https://forms.office.com/Pages/ResponsePage.aspx?id=wUQc6jN2B0Oi-R8ZVsbkG60kkwz3NsFAuzCQDKDnPMFURVlKVU9JRzYxUlBIUkhOUVoyWFdEOFhTUC4u&lang=ko" target="_blank"><button class="button button3">한국어</button></a>
+            </div>
             </div>
             <button id="myBtn">Open Modal</button>
                         
@@ -53,13 +82,17 @@
 
             <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         </header> <!-- Hello! you forgot to close the header! -->
-        <div id="contents"></div>
+        <div id="contents">
+
+
+ 
+
+        </div>
         <div id="legend"></div>
         <div id="map"></div>
         <div id="survey"></div>
         <!-- Trigger/Open The Modal -->
         
-
         <!-- The Modal -->
         <div id="myModal" class="modal">
         

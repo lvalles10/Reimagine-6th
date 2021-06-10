@@ -308,21 +308,23 @@ function addMarker(data){
       "picture":data.pictureresponse,
       "gentrification":data.gentrification
     } 
+    console.log(data)
+    console.log(data.lat_2)
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat_2)],{surveyData}) // Albert: i added the surveyData object here
     // you want to use the KTownResident variable!, Lauren: Added this 6/5! //Albert: you needed to pass in the surveyData object still!!! because it has all the data!
 
     // put all the turfJS points into `allPoints`
     allPoints.push(thisPoint)
     if(data.ktownresident == "Yes"){
         exampleOptions.fillColor = "lightblue"
-        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        // createButtons(data.lat,data.lng,data.address)
+        KTownResident.addLayer(L.circleMarker([data.lat_2,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
+        // createButtons(data.lat_2,data.lng,data.address)
         }
     else{
         exampleOptions.fillColor = "hotpink"
-        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        // createButtons(data.lat,data.lng,data.address)
+        NotKTownResident.addLayer(L.circleMarker([data.lat_2,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
+        // createButtons(data.lat_2,data.lng,data.address)
     }
     return data.address, data.communityissues
 }

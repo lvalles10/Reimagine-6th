@@ -38,6 +38,8 @@ let allLayers;
 
 // this is the boundary layer located as a geojson in the /data/ folder 
 const boundaryLayer = "./data/la_zipcodes.geojson"
+console.log('boundaryLayer')
+console.log(boundaryLayer)
 let boundary; // place holder for the data 
 let collected; // variable for turf.js collected points 
 let allPoints = []; // array for all the data points
@@ -50,28 +52,30 @@ var support = ["Yes", "No", "Unsure"]
 support.length
 // 3. divide the progress bar by total number of values in the array, Lauren: How to divide?
 // 4. do javascript .sort() to sort by alphabetical
-support.sort ("Yes", "No", "Unsure")
+
+// support.sort("Yes", "No", "Unsure")
+
 // 5. assign classes of the array based on "yes"/"no"/"unsure"
-                      var support = 0;
-                      function move() {
-                        if (support == "Yes") {
-                          support = 1;
-                          var elem = document.getElementById("myBar");
-                          document.set.attribute ("class","Yes")
-                          var width = 10;
-                          var id = setInterval(frame, 10);
-                          function frame() {
-                            if (width >= 100) {
-                              clearInterval(id);
-                              support = "Yes";
-                            } else {
-                              width++;
-                              elem.style.width = width + "%";
-                              elem.innerHTML = width  + "%";
-                            }
-                          }
-                        }
-                      } 
+                      // var support = 0;
+                      // function move() {
+                      //   if (support == "Yes") {
+                      //     support = 1;
+                      //     var elem = document.getElementById("myBar");
+                      //     document.set.attribute ("class","Yes")
+                      //     var width = 10;
+                      //     var id = setInterval(frame, 10);
+                      //     function frame() {
+                      //       if (width >= 100) {
+                      //         clearInterval(id);
+                      //         support = "Yes";
+                      //       } else {
+                      //         width++;
+                      //         elem.style.width = width + "%";
+                      //         elem.innerHTML = width  + "%";
+                      //       }
+                      //     }
+                      //   }
+                      // } 
 
 // 6. create a loop for each of the segments - Lauren: I think I have above?
 // 6a. create if-statement to separate based on yes/no/unsure - Lauren: How to do all three?
@@ -140,7 +144,7 @@ function getBoundary(layer){
     .then(data =>{
                 //set the boundary to data
                 boundary = data
-
+                // console.log(boundary)
                 // run the turf collect geoprocessing
                 collected = turf.collect(boundary, thePoints, 'surveyData', 'values'); //we can see the surveyData object for each Polygon now!
                 // just for fun, you can make buffers instead of the collect too:
@@ -151,7 +155,6 @@ function getBoundary(layer){
                 // here is the geoJson of the `collected` result:
                 L.geoJson(collected,{onEachFeature: onEachFeature,style:function(feature)
                 {
-                    
                     // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
                       // for this Zipcode, set everything to 0 first using this residentCounts object
@@ -294,7 +297,7 @@ function addMarker(data){
     // let age = data.age
     // let support = data.support
     console.log('data')
-    console.log(data)
+    // console.log(data)
     let surveyData = {
       "kTownResident":data.ktownresident,
       "affiliation":data.affiliation, 

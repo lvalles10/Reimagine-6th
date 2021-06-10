@@ -421,8 +421,8 @@ function addMarker(data){
       "picture":data.pictureresponse,
       "gentrification":data.gentrification
     } 
-    // console.log(data)
-    // console.log(data.lat_2)
+    console.log(data)
+    console.log(data.lat_2)
     // create the turfJS point
     let thisPoint = turf.point([Number(data.lng),Number(data.lat_2)],{surveyData}) // Albert: i added the surveyData object here
     // you want to use the KTownResident variable!, Lauren: Added this 6/5! //Albert: you needed to pass in the surveyData object still!!! because it has all the data!

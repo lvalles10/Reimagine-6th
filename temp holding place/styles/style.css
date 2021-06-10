@@ -17,8 +17,9 @@ header {
 	color: white;
 	display: grid;
 	grid-template-columns: repeat(2,1fr);
-	grid-template-rows: repeat(2, .3fr);
-  padding: 10px
+	grid-template-rows: repeat(2, .1fr);
+  padding: 10px;
+  font-size: x-large;
 }
 
 .zipstories{
@@ -138,12 +139,16 @@ header{
 #map{
     height:90vh;
     grid-area: mappanel;
+    border-radius: 8px; 
+  position: relative; 
+  z-index: 500;
 } 
 
 
 #mapid {
   height: 100%;
   width: 100%;
+  
 }
 
 /* Lauren: Adding in CSS for the chart */

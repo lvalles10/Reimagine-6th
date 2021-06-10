@@ -102,7 +102,7 @@ h4 .header{
 
 
 .yesBar{
-  background-color:green;
+  background-color:rgb(105, 185, 68);
   /* border-radius:10px; */
   grid-column:1;
   grid-row:1;

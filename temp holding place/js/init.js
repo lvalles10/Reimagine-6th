@@ -38,6 +38,8 @@ let allLayers;
 
 // this is the boundary layer located as a geojson in the /data/ folder 
 const boundaryLayer = "./data/la_zipcodes.geojson"
+console.log('boundaryLayer')
+console.log(boundaryLayer)
 let boundary; // place holder for the data 
 let collected; // variable for turf.js collected points 
 let allPoints = []; // array for all the data points
@@ -50,28 +52,30 @@ var support = ["Yes", "No", "Unsure"]
 support.length
 // 3. divide the progress bar by total number of values in the array, Lauren: How to divide?
 // 4. do javascript .sort() to sort by alphabetical
-support.sort ("Yes", "No", "Unsure")
+
+// support.sort("Yes", "No", "Unsure")
+
 // 5. assign classes of the array based on "yes"/"no"/"unsure"
-                      var support = 0;
-                      function move() {
-                        if (support == "Yes") {
-                          support = 1;
-                          var elem = document.getElementById("myBar");
-                          document.set.attribute ("class","Yes")
-                          var width = 10;
-                          var id = setInterval(frame, 10);
-                          function frame() {
-                            if (width >= 100) {
-                              clearInterval(id);
-                              support = "Yes";
-                            } else {
-                              width++;
-                              elem.style.width = width + "%";
-                              elem.innerHTML = width  + "%";
-                            }
-                          }
-                        }
-                      } 
+                      // var support = 0;
+                      // function move() {
+                      //   if (support == "Yes") {
+                      //     support = 1;
+                      //     var elem = document.getElementById("myBar");
+                      //     document.set.attribute ("class","Yes")
+                      //     var width = 10;
+                      //     var id = setInterval(frame, 10);
+                      //     function frame() {
+                      //       if (width >= 100) {
+                      //         clearInterval(id);
+                      //         support = "Yes";
+                      //       } else {
+                      //         width++;
+                      //         elem.style.width = width + "%";
+                      //         elem.innerHTML = width  + "%";
+                      //       }
+                      //     }
+                      //   }
+                      // } 
 
 // 6. create a loop for each of the segments - Lauren: I think I have above?
 // 6a. create if-statement to separate based on yes/no/unsure - Lauren: How to do all three?
@@ -140,7 +144,7 @@ function getBoundary(layer){
     .then(data =>{
                 //set the boundary to data
                 boundary = data
-
+                // console.log(boundary)
                 // run the turf collect geoprocessing
                 collected = turf.collect(boundary, thePoints, 'surveyData', 'values'); //we can see the surveyData object for each Polygon now!
                 // just for fun, you can make buffers instead of the collect too:
@@ -151,7 +155,6 @@ function getBoundary(layer){
                 // here is the geoJson of the `collected` result:
                 L.geoJson(collected,{onEachFeature: onEachFeature,style:function(feature)
                 {
-                    
                     // Albert: if there is more than 1 data in the Zipcode do something!
                     if (feature.properties.values.length > 0) {
                       // for this Zipcode, set everything to 0 first using this residentCounts object
@@ -232,10 +235,6 @@ function createZipcodeContent(zipcode){
   createBar(zipcode.values,zipcode.name)
 }
 
-function showStories(theZipCodeClicked){
-
-}
-
 function createBar(support,zipcode){
   // console.log(support)
   let yes = support.YesTotal
@@ -298,7 +297,7 @@ function addMarker(data){
     // let age = data.age
     // let support = data.support
     console.log('data')
-    console.log(data)
+    // console.log(data)
     let surveyData = {
       "kTownResident":data.ktownresident,
       "affiliation":data.affiliation, 
@@ -309,21 +308,23 @@ function addMarker(data){
       "picture":data.pictureresponse,
       "gentrification":data.gentrification
     } 
+    console.log(data)
+    console.log(data.lat_2)
     // create the turfJS point
-    let thisPoint = turf.point([Number(data.lng),Number(data.lat)],{surveyData}) // Albert: i added the surveyData object here
+    let thisPoint = turf.point([Number(data.lng),Number(data.lat_2)],{surveyData}) // Albert: i added the surveyData object here
     // you want to use the KTownResident variable!, Lauren: Added this 6/5! //Albert: you needed to pass in the surveyData object still!!! because it has all the data!
 
     // put all the turfJS points into `allPoints`
     allPoints.push(thisPoint)
     if(data.ktownresident == "Yes"){
         exampleOptions.fillColor = "lightblue"
-        KTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        // createButtons(data.lat,data.lng,data.address)
+        KTownResident.addLayer(L.circleMarker([data.lat_2,data.lng],exampleOptions).bindPopup(`<h2>Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
+        // createButtons(data.lat_2,data.lng,data.address)
         }
     else{
         exampleOptions.fillColor = "hotpink"
-        NotKTownResident.addLayer(L.circleMarker([data.lat,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
-        // createButtons(data.lat,data.lng,data.address)
+        NotKTownResident.addLayer(L.circleMarker([data.lat_2,data.lng],exampleOptions).bindPopup(`<h2>Not a Koreatown resident</h2>`+ '' + `<p>Most frequented location: ${data.address}`))
+        // createButtons(data.lat_2,data.lng,data.address)
     }
     return data.address, data.communityissues
 }
@@ -491,32 +492,3 @@ window.onclick = function(event) {
   }
 }
 document.getElementById("myBtn").click() // simulate click to start modal
-
-var slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-// Thumbnail image controls
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-}

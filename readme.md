@@ -6,7 +6,7 @@ Final Presentation:https://drive.google.com/file/d/1h8hKvdezzTVBnOIL6_ys0d00QYTA
 
 ## Table of Contents:
 * Objective
-* Technology Used for the Project
+* Technologies Used
 * Future Utilizations
 * Website Features and Screenshots
 
@@ -26,7 +26,7 @@ We will be working in conjunction with Streets FOR ALL on their ongoing project 
 
 Developing this crowd-sourced mapping application could present such issues as the inherent biases within our data and difficulty in reconciling data from different sources. Another problem that could arise during our project process could be the language barrier between our group and the Korean constituents who we hope to collect data and narratives from regarding the project. Hopefully we can seek out the assistance of our Korean-speaking friends to develop a survey that adequately collects the stories of Korean constituents and their feelings about the project!
 
-## Technology Used for the Project:
+## Technologies Used:
 
 For our project, we utilized Microsoft Forms, Google Sheets, and Leaflet. The Microsoft Form was used to collect community survey responses and data regarding folks' opinions on the "Reimagining 6th" proposal. Leaflet was used to exhibit the responses to our survey and empower community narratives. We specifcally showcased the data for the responses to Question 7 of our survey, which asked responders which community problems they felt were most prevalent in Koreatown and how certain amenities could be incorporated into the "Reimagining 6th" proposal to address those issues.
 

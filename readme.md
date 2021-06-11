@@ -33,7 +33,7 @@ For our project, we utilized Microsoft Forms, Google Sheets, and Leaflet. The Mi
 
 We hope for this technology and mapplication to be used in the future to collect authentic community narratives regarding the "Reimagining 6th" proposal. We intend for the survey responses to be taken into consideration by the Koreatown Neighborhood Council in their construction of a reimagined 6th street. We also hope that the map will continue to identify locations that are meaningful to Koreatown community members and encourage those in charge of the project to preserve and empower these sites. 
 
-We also recently learned that the mapplication and survey will be distributed this July at a pop-up of "Reimagine 6th" by Adriane Hoff and volunteers from the class to collect community stories and sentiments regarding the proposal. We're so excited for these features to populate the site! 
+We also recently learned that the mapplication and survey will be distributed this July at a pop-up of "Reimagine 6th" by Adriane Hoff and volunteers from the class to collect community stories and sentiments regarding the proposal. We're so excited for these community stories to populate the site! 
 
 ## Website Features and Screenshots
 

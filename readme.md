@@ -63,24 +63,28 @@ We also recently learned that the mapplication and survey will be distributed th
 ## File Structure
 
 **data** - Contains all data present and used in the creation of the mapplication. 
-    * 
-* ca_counties_small.geojson 
-    * ca_counties.geojson
-    - ca_zipcodes.geojson
-    - ktown.geojson
-    - la_zipcodes.geojson
+- ca_counties_small.geojson 
+- ca_counties.geojson
+- ca_zipcodes.geojson
+- ktown.geojson
+- la_zipcodes.geojson
 
 **js** - Contains all javascript code utilized.
-    - chart.js
-    - init.js
-    - scrollama.js
+- chart.js
+- init.js
+- scrollama.js
 
 **landingpage** - Contains original landing page used when official website was under construction.
+- index.html
+- ktown.jpg
+- main.png
 
 **styles** - Contains all css used to visualize the site.
+- style.css
 
-* 
+**index.html** - This is the main site location.
 
+**readme.md** - Where you're reading this!
 
 
 

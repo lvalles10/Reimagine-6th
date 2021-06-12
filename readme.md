@@ -9,6 +9,7 @@ Final Presentation: https://drive.google.com/file/d/1h8hKvdezzTVBnOIL6_ys0d00QYT
 * Technologies Used
 * Future Utilizations
 * Website Features and Screenshots
+* File Structure
 
 ## Objective
 

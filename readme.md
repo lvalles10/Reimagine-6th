@@ -1,6 +1,6 @@
 ## Reimagining 6th Street: 
 
-Website: https://lvalles10.github.io/Reimagine-6th/temp%20holding%20place/index.html
+Website: https://lvalles10.github.io/Reimagine-6th/
 
 Final Presentation: https://drive.google.com/file/d/1h8hKvdezzTVBnOIL6_ys0d00QYTAa3QV/view?usp=sharing.
 
@@ -59,6 +59,26 @@ We also recently learned that the mapplication and survey will be distributed th
 **Community Stories**: Upon clicking on the zipcode boxes, the community stories for what respondents feel are some of the most prevalent issues in Koreatown and suggested incorporations for the proposal pop up. This is to clearly indicate to WCKNC members what the survey respondents feel should be addressed in the project. 
 
 <img width="706" alt="Screen Shot 2021-06-11 at 11 32 17 AM" src="https://user-images.githubusercontent.com/81767103/121751740-728c9900-caaa-11eb-9f44-f4460f7c20c2.png">
+
+## File Structure
+
+**data** - Contains all data present and used in the creation of the mapplication.
+    - ca_counties_small.geojson
+    - ca_counties.geojson
+    - ca_zipcodes.geojson
+    - ktown.geojson
+    - la_zipcodes.geojson
+
+**js** - Contains all javascript code utilized.
+    - chart.js
+    - init.js
+    - scrollama.js
+
+**landingpage** - Contains original landing page whilst official website was under construction.
+
+**styles** - Contains 
+
+
 
 
 

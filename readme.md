@@ -62,9 +62,10 @@ We also recently learned that the mapplication and survey will be distributed th
 
 ## File Structure
 
-**data** - Contains all data present and used in the creation of the mapplication.
-    - ca_counties_small.geojson
-    - ca_counties.geojson
+**data** - Contains all data present and used in the creation of the mapplication. 
+    * 
+* ca_counties_small.geojson 
+    * ca_counties.geojson
     - ca_zipcodes.geojson
     - ktown.geojson
     - la_zipcodes.geojson
@@ -74,9 +75,11 @@ We also recently learned that the mapplication and survey will be distributed th
     - init.js
     - scrollama.js
 
-**landingpage** - Contains original landing page whilst official website was under construction.
+**landingpage** - Contains original landing page used when official website was under construction.
 
-**styles** - Contains 
+**styles** - Contains all css used to visualize the site.
+
+* 
 
 
 

@@ -62,7 +62,7 @@ We also recently learned that the mapplication and survey will be distributed th
 
 ## File Structure
 
-**data** - Contains all data present and used in the creation of the mapplication. 
+**data** - Contains all spatial data present and used in the creation of the mapplication. 
 - ca_counties_small.geojson 
 - ca_counties.geojson
 - ca_zipcodes.geojson
